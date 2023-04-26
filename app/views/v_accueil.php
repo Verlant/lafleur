@@ -60,19 +60,17 @@
 <section>
     <div class="basic-section">
         <div class="content-section">
-            <p class="text">
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Exercitation veniam consequat sunt nostrud amet.
-            </p>
-            <p class="text">
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Exercitation veniam consequat sunt nostrud amet.
-            </p>
-            <p class="text">
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Exercitation veniam consequat sunt nostrud amet.
-            </p>
+            <h1>Boutique en ligne</h1>
+            <img src="public/img/event.svg" alt="">
         </div>
         <div class="content-section">
+            <p class="text">
+                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Exercitation veniam consequat sunt nostrud amet.
+            </p>
+            <p class="text">
+                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Exercitation veniam consequat sunt nostrud amet.
+            </p>
             <a class="primary-btn" href="#">Notre boutique</a>
-            <img src="public/img/event.svg" alt="">
         </div>
     </div>
 </section>
@@ -83,9 +81,6 @@
             <img src="public/img/event.svg" alt="">
         </div>
         <div class="content-section">
-            <p class="text">
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-            </p>
             <p class="text">
                 Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
             </p>

@@ -50,7 +50,7 @@
 .footer-contact {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  justify-content: space-between;
 }
 
 .logo {
@@ -58,5 +58,67 @@
   height: 25px;
 }
 
+#header-nav-mobile {
+  display: none;
+}
+
+.footer-link-container {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 800px) {
+  .footer-link-container {
+    width: auto;
+    height: 100%;
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 700px) {
+  #header-nav {
+    display: none;
+  }
+  #header-nav-mobile {
+    display: block;
+    background-color: var(--secondary-color);
+  }
+  #header-nav-mobile > * {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 0.6rem;
+  }
+  .header-link {
+    font-size: 0.9rem;
+  }
+  #footer-nav > * {
+    height: 100px;
+    padding: 10px;
+  }
+  .footer-logo-lafleur {
+    /* width: 50px; */
+    height: 85px;
+  }
+}
+
+@media (max-width: 400px) {
+  .header-link {
+    font-size: 0.75rem;
+  }
+  .footer-contact {
+    font-size: 0.8rem;
+  }
+  .footer-link-container {
+    width: auto;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .footer-link {
+    font-size: 0.8rem;
+    padding: 5px;
+  }
 }

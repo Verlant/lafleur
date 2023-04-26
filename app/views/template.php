@@ -15,34 +15,50 @@
     <header>
         <nav id="header-nav">
             <ul>
-                <li><a class="header-link" href="index.php?uc=boutique">Boutique</a></li>
-                <li><a class="header-link" href="index.php?uc=aPropos">A propos</a></li>
+                <li>
+                    <a class="header-link" href="index.php?uc=boutique">Boutique</a>
+                </li>
+                <li>
+                    <a class="header-link" href="index.php?uc=aPropos">A propos</a>
+                </li>
                 <li>
                     <a href="index.php?uc=accueil">
                         <img src="public/img/logo-la-fleur.svg" alt="logo lafleur" />
                     </a>
                 </li>
-                <li><a class="header-link" href="index.php?uc=espaceClient">Espace client</a></li>
-                <li><a class="header-link" href="index.php?uc=panier">Panier</a></li>
+                <li>
+                    <a class="header-link" href="index.php?uc=espaceClient">Espace client</a>
+                </li>
+                <li>
+                    <a class="header-link" href="index.php?uc=panier">Panier</a>
+                </li>
             </ul>
         </nav>
         <nav id="header-nav-mobile">
             <ul>
                 <li>
-                    <img src="public/img/menu-burger.svg" alt="icone de menu burger">
+                    <!-- <img src="public/img/menu-burger.svg" alt="icone de menu burger"> -->
+                    <a class="header-link" href="index.php?uc=boutique">Boutique</a>
+                </li>
+                <li>
+                    <!-- <a href="index.php?uc=espaceClient">
+                        <img src="public/img/compte.svg" alt="icone de menu burger">
+                    </a> -->
+                    <a class="header-link" href="index.php?uc=aPropos">A propos</a>
+
                 </li>
                 <li>
                     <a href="index.php?uc=accueil">
-                        <img src="public/img/logo-la-fleur.svg" alt="logo lafleur" />
+                        <img class="logo-mobile" src="public/img/logo-mobile.svg" alt="logo lafleur" />
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?uc=espaceClient">
-                        <img src="public/img/menu-burger.svg" alt="icone de menu burger">
-                    </a>
+                    <a class="header-link" href="index.php?uc=espaceClient">Espace client</a>
                 </li>
                 <li>
-                    <a href="index.php?uc=panier">Panier</a>
+                    <!-- <a href="index.php?uc=panier"><img src="public/img/panier.svg" alt="icone de menu burger"></a> -->
+                    <a class="header-link" href="index.php?uc=panier">Panier</a>
+
                 </li>
             </ul>
         </nav>
@@ -76,14 +92,16 @@
 
     <footer id="footer-nav">
         <ul>
-            <li>
+            <li class="footer-link-container">
                 <a class="footer-link" href="index.php?uc=blog">Blog</a>
+                <!-- </li>
+            <li> -->
+                <a class="footer-link" href="index.php?uc=boutique">Boutique</a>
             </li>
             <li>
-                <a class="footer-link" href="index.php?uc=boutique">Notre boutique</a>
-            </li>
-            <li>
-                <img src="public/img/logo-la-fleur.svg" alt="logo lafleur" />
+                <a href="index.php?uc=accueil">
+                    <img class="footer-logo-lafleur" src="public/img/logo-la-fleur.svg" alt="logo lafleur" />
+                </a>
             </li>
             <li>
                 <ul class="footer-contact">
