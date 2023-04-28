@@ -20,41 +20,19 @@
 <section>
     <h1>Sélection de bouquets</h1>
     <div class="produits-accueil">
-        <div class="card">
-            <img src="public/img/produit1.jpg" alt="image de bouquet">
-            <span class="info-produit-card">
-                <p>Bouquet de rose 19.99€</p>
-                <img src="public/img/panier.svg" alt="logo de panier">
-            </span>
-        </div>
-        <div class="card">
-            <img src="public/img/produit1.jpg" alt="image de bouquet">
-            <span class="info-produit-card">
-                <p>Bouquet de rose 19.99€</p>
-                <img src="public/img/panier.svg" alt="logo de panier">
-            </span>
-        </div>
-        <div class="card">
-            <img src="public/img/produit1.jpg" alt="image de bouquet">
-            <span class="info-produit-card">
-                <p>Bouquet de rose 19.99€</p>
-                <img src="public/img/panier.svg" alt="logo de panier">
-            </span>
-        </div>
-        <div class="card">
-            <img src="public/img/produit1.jpg" alt="image de bouquet">
-            <span class="info-produit-card">
-                <p>Bouquet de rose 19.99€</p>
-                <img src="public/img/panier.svg" alt="logo de panier">
-            </span>
-        </div>
-        <div class="card">
-            <img src="public/img/produit1.jpg" alt="image de bouquet">
-            <span class="info-produit-card">
-                <p>Bouquet de rose 19.99€</p>
-                <img src="public/img/panier.svg" alt="logo de panier">
-            </span>
-        </div>
+        <?php foreach ($lesProduits as $unProduit) :
+            $idProduit = $unProduit['id'];
+            $nomProduit = $unProduit['nom_produit'];
+            $prixVente = $unProduit['prix_vente'];
+        ?>
+            <article class="card">
+                <img src="public/img/produit1.jpg" alt="image de bouquet">
+                <span class="info-produit-card">
+                    <p><?= $nomProduit; ?> <?= $prixVente; ?> €</p>
+                    <img data-id="<?= $idProduit ?>" class="logo-panier" src="public/img/panier.svg" alt="logo de panier">
+                </span>
+            </article>
+        <?php endforeach ?>
     </div>
 </section>
 <section>

@@ -84,6 +84,12 @@
             case 'panier':
                 include "app/views/v_panier.php";
                 break;
+            case 'modifInfos':
+                include "app/views/v_modifInfos.php";
+                break;
+            case 'boutique':
+                include "app/views/v_boutique.php";
+                break;
             default:
                 break;
         }
@@ -120,6 +126,7 @@
             </li>
         </ul>
     </footer>
+    <script src="public/js/main.js"></script>
 </body>
 
 </html>

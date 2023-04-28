@@ -7,9 +7,9 @@
 function my_autoloader(String $class)
 {
     if (substr($class, 0, 2) == 'M_') {
-        include_once 'App/model/' . $class . '.php';
+        include_once 'app/model/' . $class . '.php';
     } else {
-        include_once 'App/controller/' . $class . '.php';
+        include_once 'app/controller/' . $class . '.php';
     }
 }
 
