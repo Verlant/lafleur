@@ -6,13 +6,15 @@
  */
 function afficheErreurs(array $msgErreurs)
 {
-    echo '﻿<div class="erreur"><ul>';
+    $message = '<div class="erreur"><ul>';
     foreach ($msgErreurs as $erreur) {
-?>
+        $message .
+            "?>
         <li><?php echo $erreur ?></li>
-<?php
+<?php";
     }
-    echo '</ul></div>';
+    $message . '</ul></div>';
+    return $message;
 }
 
 /**
@@ -21,5 +23,5 @@ function afficheErreurs(array $msgErreurs)
  */
 function afficheMessage(string $msg)
 {
-    echo '﻿<div class="message">' . $msg . '</div>';
+    return '<div class="message">' . $msg . '</div>';
 }

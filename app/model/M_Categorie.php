@@ -18,7 +18,10 @@ class M_Categorie
         $req = "SELECT
                     *
                 FROM
-                    categories";
+                    categories
+                JOIN
+                    produits ON categories.id = categorie_id
+                GROUP BY categories.id";
         $res = M_AccesDonnees::prepare($req);
         M_AccesDonnees::execute($res);
         $lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);

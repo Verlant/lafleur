@@ -5,7 +5,7 @@
             <img src="public/img/event.svg" alt="image d'un évènement">
         </div>
         <div class="content-section">
-            <p class="text">Pour l’événement de la fête des mères, dimanche 4 juin 2023, une loteria sera mise en place. Pendant deux semaines, toute personne qui passera une commande sur le site pourra tenter sa chance et gagner des cadeaux.</p>
+            <p class="text">Pour l'événement de la fête des mères, dimanche 4 juin 2023, une loteria sera mise en place. Pendant deux semaines, toute personne qui passera une commande sur le site pourra tenter sa chance et gagner des cadeaux.</p>
             <p class="text">Lots à gagner pour la loterie de la fête des mères :</p>
             <ol class="text">
                 <li>1. 1000 stylos “Lafleur”</li>
@@ -39,7 +39,7 @@
     <div class="basic-section">
         <div class="content-section">
             <h1>Boutique en ligne</h1>
-            <img src="public/img/event.svg" alt="">
+            <img src="public/img/open.svg" alt="">
         </div>
         <div class="content-section">
             <p class="text">
@@ -56,7 +56,7 @@
     <div class="basic-section">
         <div class="content-section">
             <h1>Blog de Guillaume Cholet</h1>
-            <img src="public/img/event.svg" alt="">
+            <img src="public/img/blog.svg" alt="">
         </div>
         <div class="content-section">
             <p class="text">

@@ -26,39 +26,13 @@
                         <img src="public/img/logo-la-fleur.svg" alt="logo lafleur" />
                     </a>
                 </li>
-                <li>
-                    <a class="header-link" href="index.php?uc=espaceClient">Espace client</a>
-                </li>
+                <?php if ($session->getIdClient()) : ?>
+                    <li><a class="header-link" href="index.php?uc=espaceClient">Espace client</a></li>
+                <?php else : ?>
+                    <a class="header-link" href="index.php?uc=connexion">Connexion</a>
+                <?php endif; ?>
                 <li>
                     <a class="header-link" href="index.php?uc=panier">Panier</a>
-                </li>
-            </ul>
-        </nav>
-        <nav id="header-nav-mobile">
-            <ul>
-                <li>
-                    <!-- <img src="public/img/menu-burger.svg" alt="icone de menu burger"> -->
-                    <a class="header-link" href="index.php?uc=boutique">Boutique</a>
-                </li>
-                <li>
-                    <!-- <a href="index.php?uc=espaceClient">
-                        <img src="public/img/compte.svg" alt="icone de menu burger">
-                    </a> -->
-                    <a class="header-link" href="index.php?uc=aPropos">A propos</a>
-
-                </li>
-                <li>
-                    <a href="index.php?uc=accueil">
-                        <img class="logo-mobile" src="public/img/logo-mobile.svg" alt="logo lafleur" />
-                    </a>
-                </li>
-                <li>
-                    <a class="header-link" href="index.php?uc=espaceClient">Espace client</a>
-                </li>
-                <li>
-                    <!-- <a href="index.php?uc=panier"><img src="public/img/panier.svg" alt="icone de menu burger"></a> -->
-                    <a class="header-link" href="index.php?uc=panier">Panier</a>
-
                 </li>
             </ul>
         </nav>
@@ -68,6 +42,9 @@
         <?php
         // Controleur de vues
         // Selon le cas d'utilisation, j'inclus un controleur ou simplement une vue
+        if (isset($message) and !empty($message)) {
+            echo $message;
+        }
         switch ($uc) {
             case 'accueil':
                 include 'app/views/v_accueil.php';
@@ -80,6 +57,9 @@
                 break;
             case 'espaceClient':
                 include "app/views/v_espaceClient.php";
+                break;
+            case 'connexion':
+                include "app/views/v_connexion.php";
                 break;
             case 'panier':
                 include "app/views/v_panier.php";

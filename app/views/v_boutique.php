@@ -4,7 +4,7 @@
         <ul class="filtre-container">
             <?php
             foreach ($lesCategories as $uneCategorie) :
-                $idCategorie = $uneCategorie['id'];
+                $idCategorie = $uneCategorie['categorie_id'];
                 $nomCategorie = $uneCategorie['nom_categorie'];
             ?>
                 <li class="li-puce">
@@ -20,7 +20,7 @@
         <ul class="filtre-container">
             <?php
             foreach ($lesCouleurs as $uneCouleur) :
-                $idCouleur = $uneCouleur['id'];
+                $idCouleur = $uneCouleur['couleur_id'];
                 $nomCouleur = $uneCouleur['nom_couleur'];
             ?>
                 <li class="li-puce">
@@ -39,7 +39,7 @@
         </h2>
     </div>
 </aside>
-<aside class="aside-mobile">
+<!-- <aside class="aside-mobile">
     <div>
         <h2>Catégories</h2>
         <ul class="filtre-container">
@@ -79,18 +79,20 @@
             </a>
         </h2>
     </div>
-</aside>
+</aside> -->
+<!-- <div class="message"><?= $messagePanier ?></div> -->
 <section class="section-boutique">
     <?php
     foreach ($lesProduits as $unProduit) :
-        $idProduit = $unProduit['id'];
+        $idProduit = $unProduit['produit_id'];
         $nomProduit = $unProduit['nom_produit'];
         $prixVente = $unProduit['prix_vente'];
     ?>
         <article class="card">
             <img src="public/img/produit1.jpg" alt="image de bouquet">
             <span class="info-produit-card">
-                <p><?= $nomProduit; ?> <?= $prixVente; ?> €</p>
+                <p><?= $nomProduit; ?> </p>
+                <p><?= $prixVente; ?> €</p>
                 <img data-id="<?= $idProduit ?>" class="logo-panier" src="public/img/panier.svg" alt="logo de panier">
             </span>
         </article>

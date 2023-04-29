@@ -10,8 +10,9 @@ class C_Session
      */
     public function verifMotDePasse(String $mail, String $mdp): int
     {
-        $data = M_Client::getInfoClientPourSession($mail);
-        $mdp_bdd = $data['motDePasse'];
+        $data = M_Client::getInfoClientParMail($mail);
+        var_dump($data);
+        $mdp_bdd = $data['mdp'];
         if (password_verify($mdp, $mdp_bdd) and estEntier($data['id'])) {
             $_SESSION['id'] = $data['id'];
             $_SESSION['pseudo'] = $data['pseudoClient'];

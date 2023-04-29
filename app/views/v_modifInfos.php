@@ -6,8 +6,8 @@
     <input type="text" name="prenom">
     <label class="text" for="rue">Rue</label>
     <input type="text" name="rue">
-    <label class="text" for="city">Ville</label>
-    <input type="text" name="city">
+    <label class="text" for="ville">Ville</label>
+    <input type="text" name="ville">
     <label class="text" for="cp">Code postal</label>
     <input type="text" name="cp">
     <label class="text" for="mail">Email</label>

@@ -18,7 +18,14 @@ class M_Couleur
         $req = "SELECT
                     *
                 FROM
-                    couleurs";
+                    produits
+                JOIN 
+                    fleur_produit ON produit_id = produits.id
+                JOIN 
+                    fleurs ON fleur_id = fleurs.id
+                JOIN
+                    couleurs ON couleur_id = couleurs.id
+                    GROUP BY couleurs.id";
         $res = M_AccesDonnees::prepare($req);
         M_AccesDonnees::execute($res);
         $lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
