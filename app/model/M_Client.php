@@ -27,7 +27,6 @@ class M_Client
         M_AccesDonnees::bindParam($res, ':mail', $mail, PDO::PARAM_STR);
         M_AccesDonnees::bindParam($res, ':password_client', $password_client, PDO::PARAM_STR);
         M_AccesDonnees::bindParam($res, ':phone', $phone, PDO::PARAM_STR);
-        M_AccesDonnees::bindParam($res, ':date_creation', $date->getTimestamp(), PDO::PARAM_INT);
         M_AccesDonnees::bindParam($res, ':adresse_id', $adresse_id, PDO::PARAM_INT);
         M_AccesDonnees::execute($res);
         return M_AccesDonnees::lastInsertId();

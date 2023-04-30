@@ -23,5 +23,5 @@ function afficheErreurs(array $msgErreurs)
  */
 function afficheMessage(string $msg)
 {
-    return '<div class="message">' . $msg . '</div>';
+    return '<p class="message text">' . $msg . '</p>';
 }

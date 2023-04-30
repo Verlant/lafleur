@@ -9,7 +9,7 @@ class M_Adresse
      * @param Int $cp_id
      * @return bool
      */
-    public static function modifAdresse(String $rue, int $ville_id, int $cp_id): bool
+    public static function creerAdresse(String $rue, int $ville_id, int $cp_id): bool
     {
         // Requete d'ecriture d'une adresse
         $req = "INSERT INTO adresses
@@ -19,7 +19,7 @@ class M_Adresse
         $res = M_AccesDonnees::prepare($req);
         $date = new DateTime();
         M_AccesDonnees::bindParam($res, ':rue', $rue, PDO::PARAM_STR);
-        M_AccesDonnees::bindParam($res, ':date_creation', $date->getTimestamp(), PDO::PARAM_INT);
+        M_AccesDonnees::bindParam($res, ':date_creation', $date->format("Y-m-d H:m:s"), PDO::PARAM_INT);
         M_AccesDonnees::bindParam($res, ':ville_id', $ville_id, PDO::PARAM_STR);
         M_AccesDonnees::bindParam($res, ':cp_id', $cp_id, PDO::PARAM_INT);
         M_AccesDonnees::execute($res);

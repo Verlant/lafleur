@@ -48,7 +48,7 @@
             <p class="text">
                 Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Exercitation veniam consequat sunt nostrud amet.
             </p>
-            <a class="primary-btn" href="#">Notre boutique</a>
+            <a class="primary-btn" href="index.php?uc=boutique">Notre boutique</a>
         </div>
     </div>
 </section>

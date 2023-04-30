@@ -1,7 +1,14 @@
 <?php
 
 session_start();
-// var_dump($_SESSION);
+// $_SESSION["produits"] = [];
+// var_dump($_SESSION["produits"]);
+// var_dump($_POST);
+// echo '<br/>';
+
+// $date = new DateTime();
+// var_dump(date("Y-m-d"));
+// var_dump($date->add(DateInterval::createFromDateString('3 days'))->format("Y-m-d H:m:s"));
 
 // Pour afficher les erreurs PHP
 error_reporting(E_ALL);
@@ -42,14 +49,21 @@ if (isset($formulaireRecu)) {
             $password_verify = filter_input(INPUT_POST, 'password_verify');
             $phone = filter_input(INPUT_POST, 'phone');
             break;
-        case "Valider l'adresse":
-            $nom = filter_input(INPUT_POST, 'nom');
-            $adresse = filter_input(INPUT_POST, 'adresse');
-            $ville = filter_input(INPUT_POST, 'ville');
-            $codePostal = filter_input(INPUT_POST, 'codePostal');
-            break;
-        case "Valider l'adresse de livraison":
-            $adresse_id = filter_input(INPUT_POST, 'adresse_id');
+            // case "Valider l'adresse":
+            //     $nom = filter_input(INPUT_POST, 'nom');
+            //     $adresse = filter_input(INPUT_POST, 'adresse');
+            //     $ville = filter_input(INPUT_POST, 'ville');
+            //     $codePostal = filter_input(INPUT_POST, 'codePostal');
+            //     break;
+            // case "Valider l'adresse de livraison":
+            //     $adresse_id = filter_input(INPUT_POST, 'adresse_id');
+            //     break;
+        case "confirmerCommande":
+            $quantites_ventes = [];
+            foreach ($_POST as $input_name => $quantite_vente) {
+                $quantites_ventes[] = filter_input(INPUT_POST, $input_name);
+            }
+            array_pop($quantites_ventes);
             break;
         default:
             break;
@@ -97,22 +111,20 @@ switch ($uc) {
         }
         $desIdProduit = $session->getLesIdProduitsDuPanier();
         $lesProduitsDuPanier = $controleur->voirPanier($session, $desIdProduit);
-        $uc = count($lesProduitsDuPanier) > 0 ? $uc : "";
+        $uc = count($lesProduitsDuPanier) > 0 ? $uc : $message = afficheMessage("Votre panier est vide.<br/><br/>Venez visiter notre boutique !<br/><br/><a class='footer-link' href='index.php?uc=boutique'>Boutique</a>");
         break;
     case 'commander':
-        // $controleur_client = new C_Client;
-        // $controleur_commande = new C_Commande;
-        // if ($action == 'confirmerCommande') {
-        //     $uc = $controleur_commande->confirmerCommande($session, $adresse_id);
-        // } else {
-        //     $uc = $controleur_commande->passerCommande($session, $uc);
-        //     $adressesClient = $controleur_client->adressesClient($session);
-        // }
-        // $infosClient = $controleur_client->infosClient($session);
+        $controleur_client = new C_Client;
+        $controleur_commande = new C_Commande;
+        if ($action == 'confirmerCommande') {
+            $message = $controleur_commande->confirmerCommande($session, $quantites_ventes);
+            $uc = 'espaceClient';
+        } else {
+            $message = $controleur_commande->passerCommande($session, $uc);
+            // $adressesClient = $controleur_client->adressesClient($session);
+        }
+        $infosClient = $controleur_client->infosClient($session);
         // $adressesClient = $controleur_client->adressesClient($session);
-        // break;
-    case 'aPropos':
-        //TODO
         break;
     case 'espaceClient':
         $controleur = new C_Client;
@@ -120,19 +132,19 @@ switch ($uc) {
             session_destroy();
             header('Location: index.php?uc=accueil&action=derniersProduitxSortis');
             exit();
-        } else if ($action == 'modifierAdresse') {
+        } else if ($action == 'modifierInfos') {
             $erreursSaisieAdresse = $controleur->adresseEstValide($nom, $adresse, $ville, $codePostal);
             if (empty($erreursSaisieAdresse) and $codePostal != "00000") {
-                $controleur->modifAdresse($adresse,  $nom,  $ville,  $codePostal, $session);
+                $controleur->creerAdresse($adresse,  $nom,  $ville,  $codePostal, $session);
             } else if ($codePostal == "00000") {
-                afficheErreurs(["Le code postal 00000 n'existe pas."]);
+                $message = afficheErreurs(["Le code postal 00000 n'existe pas."]);
             } else {
-                afficheErreurs($erreursSaisieAdresse);
+                $message = afficheErreurs($erreursSaisieAdresse);
             }
         }
         $infosClient = $controleur->infosClient($session);
-        // $commandes = $controleur->listeLesCommandes($session);
-        // $produitxParCommandes = $controleur->listeLesProduitsParCommandes($commandes);
+        $commandes = $controleur->listeLesCommandes($session);
+        $produitsParCommandes = $controleur->listeLesProduitsParCommandes($commandes);
         break;
     case 'connexion':
         $controleur = new C_Client();
@@ -157,9 +169,11 @@ switch ($uc) {
             } else if (!estUnMail($mail)) {
                 $message = afficheErreurs(["Mail non valide.", "Format demandé : exemple@domaine.com"]);
             } else if (!$session->verifMotDePasse($mail, $password)) {
-                afficheErreurs(['Mot de passe ou mail inconnu.', 'Réessayez']);
+                $message = afficheErreurs(['Mot de passe ou mail inconnu.', 'Réessayez']);
             }
         }
+        break;
+    case 'aPropos':
         break;
     default:
         header('Location: index.php');

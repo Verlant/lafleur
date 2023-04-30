@@ -41,12 +41,12 @@ class M_Produit
                             *
                         FROM
                             produits
-                        JOIN 
-                            fleur_produit ON produit_id = produits.id
-                        JOIN 
-                            fleurs ON fleur_id = fleurs.id
-                        JOIN
-                            couleurs ON couleur_id = couleurs.id
+                        -- JOIN 
+                        --     fleur_produit ON produit_id = produits.id
+                        -- JOIN 
+                        --     fleurs ON fleur_id = fleurs.id
+                        -- JOIN
+                        --     couleurs ON couleur_id = couleurs.id
                         WHERE
                             produits.id = '$unIdProduit'";
                 $res = M_AccesDonnees::prepare($req);

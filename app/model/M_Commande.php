@@ -15,24 +15,31 @@ class M_Commande
      * construit à partir du maximum existant ; crée les lignes de commandes dans la table contenir à partir du
      * tableau d'idProduit passé en paramètre
      * @param int $client_id
-     * @param int $adresse_id
-     * @param Array $listJeux
+     * @param Array $listeIdproduits
+     * @param Array $quantites_ventes
+     * @param bool $frais_livraison
      */
-    public static function creerCommande($client_id, $adresse_id, $listIdJeux)
+    public static function creerCommande($client_id, $listeIdproduits, $quantites_ventes, $frais_livraison)
     {
         M_AccesDonnees::beginTransaction();
-        $req = "INSERT INTO commande(client_id, adresse_id) VALUES (:client_id, :adresse_id)";
+        $date = new DateTime();
+        $req = "INSERT INTO commandes ( date_livraison, etat_paiement, etat_livraison, frais_livraison, client_id)
+                VALUES (:date_livraison, 'W', 'W', :frais_livraison, :client_id)";
         $res = M_AccesDonnees::prepare($req);
+        M_AccesDonnees::bindParam($res, ':date_livraison', $date->add(DateInterval::createFromDateString('1 day'))->format("Y-m-d"), PDO::PARAM_STR);
+        M_AccesDonnees::bindParam($res, ':frais_livraison', $frais_livraison, PDO::PARAM_BOOL);
         M_AccesDonnees::bindParam($res, ':client_id', $client_id, PDO::PARAM_INT);
-        M_AccesDonnees::bindParam($res, ':adresse_id', $adresse_id, PDO::PARAM_INT);
         M_AccesDonnees::execute($res);
         $commande_id = M_AccesDonnees::lastInsertId();
-        foreach ($listIdJeux as $exemplaire_id) {
-            $req = "INSERT INTO lignes_commande(commande_id, exemplaire_id) VALUES (:commande_id, :exemplaire_id)";
+        $i = 0;
+        foreach ($listeIdproduits as $produit_id) {
+            $req = "INSERT INTO commande_produit (commande_id, produit_id, quantite_vente) VALUES (:commande_id, :produit_id, :quantite_vente)";
             $res = M_AccesDonnees::prepare($req);
             M_AccesDonnees::bindParam($res, ':commande_id', $commande_id, PDO::PARAM_INT);
-            M_AccesDonnees::bindParam($res, ':exemplaire_id', $exemplaire_id, PDO::PARAM_INT);
+            M_AccesDonnees::bindParam($res, ':produit_id', $produit_id, PDO::PARAM_INT);
+            M_AccesDonnees::bindParam($res, ':quantite_vente', $quantites_ventes[$i], PDO::PARAM_INT);
             M_AccesDonnees::execute($res);
+            $i++;
         }
         M_AccesDonnees::commit();
     }
@@ -46,21 +53,13 @@ class M_Commande
      */
     public static function listeDesCommandes(int $client_id): array | false
     {
-        $req = "SELECT commande.id AS id_commande,
-                        SUM(prixVente) as prixTotal,
-                        nomPrenomLivraison as nom,
-                        adresseRueLivraison as rue,
-                        nomVille as ville,
-                        codePostal as cp
-                FROM lignes_commande
-                JOIN commande ON commande_id = commande.id  
-                JOIN exemplaire ON exemplaire_id = exemplaire.id
-                JOIN adresse_livraison ON adresse_livraison.id = adresse_id
-                JOIN ville ON ville.id = ville_id
-                JOIN code_postal ON code_postal.id = code_postal_id
-                WHERE commande.client_id = :client_id
-                GROUP BY commande.id
-                ORDER BY commande.dateCreation DESC";
+        $req = "SELECT *
+                FROM commandes
+                -- JOIN commande ON commande_id = commande.id  
+                -- JOIN produits ON produit_id = produits.id
+                WHERE commandes.client_id = :client_id
+                GROUP BY commandes.id
+                ORDER BY commandes.date_commande DESC";
         $res = M_AccesDonnees::prepare($req);
         M_AccesDonnees::bindParam($res, ":client_id", $client_id, PDO::PARAM_INT);
         M_AccesDonnees::execute($res);
@@ -68,23 +67,19 @@ class M_Commande
     }
 
     /**
-     * Effectue une requete de lecture afin de récupérer la liste des jeux commandé par un client
+     * Effectue une requete de lecture afin de récupérer la liste des produits commandé par un client
      * en fonction de leur id de commande
      * Renvoie false en cas d'erreur
      * @param int id commande
      * @return Array|false
      */
-    public static function trouveLesJeuxParCommande(int $id_commande): array | false
+    public static function trouveLesProduitsParCommande(int $id_commande): array | false
     {
-        $req = "SELECT commande.id as commande_id, nomJeux, nomCategorie, nomConsole, descriptionEtat, imageJeux, prixVente
-                FROM lignes_commande
-                JOIN commande ON commande_id = commande.id  
-                JOIN exemplaire ON exemplaire_id = exemplaire.id
-                JOIN jeux ON jeux.id = jeux_id
-                JOIN console ON console.id = console_id
-                JOIN categorie ON categorie.id = categorie_id
-                JOIN etat ON etat.id = etat_id
-                WHERE commande.id = :id_commande";
+        $req = "SELECT *
+                FROM commande_produit
+                JOIN commandes ON commande_id = commandes.id  
+                JOIN produits ON produit_id = produits.id
+                WHERE commandes.id = :id_commande";
         $res = M_AccesDonnees::prepare($req);
         M_AccesDonnees::bindParam($res, ":id_commande", $id_commande, PDO::PARAM_INT);
         M_AccesDonnees::execute($res);

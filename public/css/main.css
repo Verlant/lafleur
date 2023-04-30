@@ -49,7 +49,7 @@ main {
   flex-direction: column;
   /* justify-content: center;
   align-items: center; */
-  padding: 50px 25px;
+  padding: 50px 0px;
   gap: 100px;
   min-height: calc(99.9vh - 280px);
 }
@@ -93,6 +93,7 @@ img {
 }
 
 .primary-btn {
+  width: fit-content;
   background-color: var(--secondary-color);
   color: var(--primary-color);
   font-family: var(--title-font);
@@ -103,7 +104,7 @@ img {
 }
 
 .produits-accueil {
-  width: 100vw;
+  width: 100%;
   border-width: 2px 0px;
   border-style: solid;
   border-color: #32620e;
@@ -183,6 +184,10 @@ input {
   max-width: 300px;
 } */
 
+.adresse-container {
+  width: 30%;
+}
+
 /* boutique */
 
 .aside-desktop {
@@ -231,7 +236,7 @@ h2 {
   flex-wrap: wrap;
   /* justify-content: space-between; */
   gap: 50px;
-  margin-left: 15%;
+  margin-left: 17%;
 }
 
 .logo-panier {
@@ -239,18 +244,16 @@ h2 {
 }
 
 .google-map {
-  align-self: flex-start;
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.google-map iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 500px;
-  height: 300px;
+iframe {
+  width: 90%;
+  margin-top: 25px;
 }
 
 .message {
@@ -266,11 +269,93 @@ h2 {
 
 .client-section {
   width: 100%;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .infos-client {
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.section-commandes {
+  width: 80%;
+  flex-direction: column;
+  gap: 25px;
+  padding: 50px;
+}
+
+.section-commandes > * {
+  width: 100%;
+}
+
+.produit-li {
+  list-style-type: disc;
+  padding: 5px;
+}
+
+/* Panier */
+
+.section-panier {
+  flex-direction: column;
+  gap: 50px;
+  border: none;
+}
+
+.article-panier {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 1px solid var(--primary-color);
+  border-radius: 20px;
+  padding: 15px;
+}
+
+.article-panier > img {
+  height: 270px;
+}
+
+.description-container {
+  width: 50%;
+}
+
+.description {
+  padding: 10px;
+}
+
+.div-prix {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
+}
+.div-prix > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.div-prix > div > label {
+  padding-bottom: 5px;
+}
+
+.div-prix > div > input {
+  width: 100px;
+}
+
+.div-prix > .primary-btn {
+  margin-top: 15px;
+}
+
+.text-center {
+  text-align: center;
 }
 
 /* mediaqueries */
@@ -304,6 +389,37 @@ h2 {
   .card:last-child {
     display: none;
   }
+
+  .section-panier {
+    max-width: 80%;
+  }
+
+  .article-panier {
+    flex-wrap: wrap;
+  }
+
+  .div-prix {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .description-container {
+    margin-top: 10px;
+  }
+
+  .div-prix > div {
+    flex-direction: row;
+  }
+
+  .div-prix > div > label {
+    padding-bottom: 10px;
+  }
+
+  .div-prix > .primary-btn {
+    margin-top: 0;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -325,6 +441,18 @@ h2 {
   .section-boutique {
     margin-left: 48%;
     gap: 20px;
+  }
+  .article-panier {
+    flex-direction: column;
+  }
+  .description-container {
+    width: auto;
+  }
+  .div-prix {
+    flex-direction: column;
+  }
+  .div-prix > .primary-btn {
+    margin-top: 15px;
   }
 }
 
@@ -367,7 +495,7 @@ h2 {
     font-size: 1rem;
   }
   .filtre-boutique {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
   .card:nth-child(2) {
     display: none;
@@ -382,17 +510,26 @@ h2 {
 }
 
 @media (max-width: 450px) {
-  div,
+  /* div,
   img,
   a,
   span {
     scale: 0.9;
-  }
+  } */
   .aside-desktop {
-    padding: 0;
+    padding: 5px;
   }
   .section-boutique {
-    margin-left: 140px;
+    margin-left: 50%;
+  }
+  .card {
+    height: 200px;
+    width: 150px;
+    /* scale: 0.8; */
+  }
+  .info-produit-card {
+    width: 150px;
+    top: 160px;
   }
 }
 

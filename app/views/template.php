@@ -23,7 +23,7 @@
                 </li>
                 <li>
                     <a href="index.php?uc=accueil">
-                        <img src="public/img/logo-la-fleur.svg" alt="logo lafleur" />
+                        <img class="header-logo" src="public/img/logo-la-fleur.svg" alt="logo lafleur" />
                     </a>
                 </li>
                 <?php if ($session->getIdClient()) : ?>
@@ -37,7 +37,6 @@
             </ul>
         </nav>
     </header>
-
     <main>
         <?php
         // Controleur de vues
@@ -80,8 +79,6 @@
         <ul>
             <li class="footer-link-container">
                 <a class="footer-link" href="index.php?uc=blog">Blog</a>
-                <!-- </li>
-            <li> -->
                 <a class="footer-link" href="index.php?uc=boutique">Boutique</a>
             </li>
             <li>

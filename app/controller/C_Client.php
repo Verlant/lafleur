@@ -54,7 +54,7 @@ class C_Client
             // Si oui ne l'ajoute pas et récupère son id
             // Si non l'ajoute dans la bdd
             if ($adresse_id = M_Adresse::trouveAdresse($rue, $ville_id, $cp_id) == false) {
-                $adresse_id = M_Adresse::modifAdresse($rue, $ville_id, $cp_id);
+                $adresse_id = M_Adresse::creerAdresse($rue, $ville_id, $cp_id);
             } else {
                 $adresse_id = M_Adresse::trouveAdresse($rue, $ville_id, $cp_id);
             }
@@ -96,7 +96,7 @@ class C_Client
      * @param C_Session $session
      * @return void
      */
-    public function modifAdresse(
+    public function creerAdresse(
         String $adresse,
         String $nom,
         String $ville,
@@ -111,7 +111,7 @@ class C_Client
         // Si oui ne l'ajoute pas et récupère son id
         // Si non l'ajoute dans la bdd
         if (M_Ville::trouveLaVille($ville) == false) {
-            $livrable = 1;
+            $livrable = true;
             $ville_id = M_Ville::creerVille($ville, $livrable);
         } else {
             $ville_id = M_Ville::trouveLaVille($ville)['id'];
@@ -127,7 +127,7 @@ class C_Client
         }
 
         $client_id = $session::getIdClient();
-        M_Adresse::modifAdresse($adresse,  $nom, $ville_id, $cp_id, $client_id);
+        M_Adresse::creerAdresse($adresse,  $nom, $ville_id, $cp_id, $client_id);
 
         // Commit la transaction
         M_AccesDonnees::commit();
@@ -176,7 +176,7 @@ class C_Client
 
     /**
      * Récupère un tableau contenant la liste des commandes et le traite pour
-     * renvoyer un tableau associatif contenant la liste des jeux par commande.
+     * renvoyer un tableau associatif contenant la liste des produits par commande.
      * Renvoie false si une erreur est rencontré
      * @param Array|false $commandes
      * @return Array|false
@@ -187,8 +187,8 @@ class C_Client
             return false;
         }
         foreach ($commandes as $commande) {
-            $jeuxParCommande[$commande["id_commande"]] = M_Commande::trouveLesJeuxParCommande($commande["id_commande"]);
+            $produitsParCommande[$commande["id"]] = M_Commande::trouveLesProduitsParCommande($commande["id"]);
         }
-        return $jeuxParCommande;
+        return $produitsParCommande;
     }
 }
