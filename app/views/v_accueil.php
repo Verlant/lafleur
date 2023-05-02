@@ -28,7 +28,8 @@
             <article class="card">
                 <img src="public/img/produit1.jpg" alt="image de bouquet">
                 <span class="info-produit-card">
-                    <p><?= $nomProduit; ?> <?= $prixVente; ?> €</p>
+                    <p class="nom-produit"><?= $nomProduit; ?> </p>
+                    <p class="text-center"><?= $prixVente; ?> €</p>
                     <img data-id="<?= $idProduit ?>" class="logo-panier" src="public/img/panier.svg" alt="logo de panier">
                 </span>
             </article>

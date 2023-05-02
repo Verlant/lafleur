@@ -16,9 +16,13 @@ class M_Produit
     public static function trouveLesProduits()
     {
         $req = "SELECT
-                    *, produits.id as produit_id
-                FROM
-                    produits";
+                        nom_produit, produit_id, prix_vente, quantite_fleur, quantite_stock
+                FROM 
+                    produits 
+                JOIN 
+                    fleur_produit ON produits.id = produit_id
+                JOIN 
+                    fleurs ON fleur_id = fleurs.id";
         $res = M_AccesDonnees::prepare($req);
         M_AccesDonnees::execute($res);
         $lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);

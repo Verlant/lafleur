@@ -133,9 +133,9 @@ img {
   align-items: center;
   position: absolute;
   width: 100%;
-  height: 40px;
+  height: 50px;
   left: 0px;
-  top: 210px;
+  top: 200px;
   background: var(--white-color);
   border-radius: 0px 0px 20px 20px;
   color: var(--black-color);
@@ -242,6 +242,12 @@ h2 {
   margin-left: 17%;
 }
 
+.nom-produit {
+  width: 50%;
+  padding-left: 5px;
+  text-align: center;
+}
+
 .logo-panier {
   cursor: pointer;
 }
@@ -303,7 +309,6 @@ iframe {
 }
 
 .produit-li {
-  list-style-type: disc;
   padding: 5px;
 }
 
@@ -547,12 +552,20 @@ iframe {
     /* scale: 0.8; */
   }
   .info-produit-card {
+    height: 40px;
     width: 150px;
     top: 160px;
+  }
+  .info-produit-card > p {
+    font-size: 0.8rem;
   }
   .boutons-espace-client {
     flex-direction: column;
     gap: 10px;
+  }
+  .logo-panier {
+    width: 30px;
+    height: 30px;
   }
 }
 

@@ -35,7 +35,7 @@ class C_Client
             // Si oui ne l'ajoute pas et récupère son id
             // Si non l'ajoute dans la bdd
             if (M_Ville::trouveLaVille($ville) == false) {
-                $livrable = random_int(0, 1);
+                $livrable = 0;
                 $ville_id = M_Ville::creerVille($ville, $livrable);
             } else {
                 $ville_id = M_Ville::trouveLaVille($ville)['id'];
