@@ -7,9 +7,9 @@ class M_Adresse
      * @param String $rue
      * @param Int $ville_id
      * @param Int $cp_id
-     * @return bool
+     * @return int|false
      */
-    public static function creerAdresse(String $rue, int $ville_id, int $cp_id): bool
+    public static function creerAdresse(String $rue, int $ville_id, int $cp_id): int | false
     {
         // Requete d'ecriture d'une adresse
         $req = "INSERT INTO adresses
@@ -19,7 +19,7 @@ class M_Adresse
         $res = M_AccesDonnees::prepare($req);
         $date = new DateTime();
         M_AccesDonnees::bindParam($res, ':rue', $rue, PDO::PARAM_STR);
-        M_AccesDonnees::bindParam($res, ':date_creation', $date->format("Y-m-d H:m:s"), PDO::PARAM_INT);
+        M_AccesDonnees::bindParam($res, ':date_creation', $date->format("Y-m-d H:i:s"), PDO::PARAM_INT);
         M_AccesDonnees::bindParam($res, ':ville_id', $ville_id, PDO::PARAM_STR);
         M_AccesDonnees::bindParam($res, ':cp_id', $cp_id, PDO::PARAM_INT);
         M_AccesDonnees::execute($res);
@@ -37,8 +37,8 @@ class M_Adresse
      */
     public static function trouveAdresse(String $rue, int $ville_id, int $cp_id): array | false
     {
-        $req = "SELECT DISTINCT
-                    *
+        $req = "SELECT
+                    adresses.id
                 FROM
                     adresses
                 JOIN
@@ -56,6 +56,6 @@ class M_Adresse
         M_AccesDonnees::bindParam($res, ':ville_id', $ville_id, PDO::PARAM_STR);
         M_AccesDonnees::bindParam($res, ':cp_id', $cp_id, PDO::PARAM_STR);
         M_AccesDonnees::execute($res);
-        return $res->fetchAll(PDO::FETCH_ASSOC);
+        return $res->fetch(PDO::FETCH_ASSOC);
     }
 }

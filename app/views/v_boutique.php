@@ -80,7 +80,6 @@
         </h2>
     </div>
 </aside> -->
-<!-- <div class="message"><?= $messagePanier ?></div> -->
 <section class="section-boutique">
     <?php
     foreach ($lesProduits as $unProduit) :

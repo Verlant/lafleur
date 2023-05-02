@@ -35,7 +35,7 @@ class C_Client
             // Si oui ne l'ajoute pas et récupère son id
             // Si non l'ajoute dans la bdd
             if (M_Ville::trouveLaVille($ville) == false) {
-                $livrable = 1;
+                $livrable = random_int(0, 1);
                 $ville_id = M_Ville::creerVille($ville, $livrable);
             } else {
                 $ville_id = M_Ville::trouveLaVille($ville)['id'];
@@ -53,12 +53,13 @@ class C_Client
             // Vérifie si l'adresse existe deja dans la bdd
             // Si oui ne l'ajoute pas et récupère son id
             // Si non l'ajoute dans la bdd
-            if ($adresse_id = M_Adresse::trouveAdresse($rue, $ville_id, $cp_id) == false) {
+            if (M_Adresse::trouveAdresse($rue, $ville_id, $cp_id) == false) {
                 $adresse_id = M_Adresse::creerAdresse($rue, $ville_id, $cp_id);
             } else {
-                $adresse_id = M_Adresse::trouveAdresse($rue, $ville_id, $cp_id);
+                $adresse_id = M_Adresse::trouveAdresse($rue, $ville_id, $cp_id)['id'];
             }
-
+            // var_dump($adresse_id);
+            // die;
             $password = password_hash($password, PASSWORD_BCRYPT);
             M_Client::creerCompteClient(
                 $nom,
@@ -141,24 +142,24 @@ class C_Client
      * @param $ville : chaîne
      * @param $cp : chaîne
      * @param $mail : chaîne
-     * @return Array : array
+     * @return String : string
      */
-    public static function adresseEstValide($nom, $rue, $ville, $cp)
+    public static function adresseEstValide($nom, $rue, $ville, $cp): String
     {
-        $erreurs = [];
+        $erreurs = "";
         if ($nom == "") {
-            $erreurs[] = "Il faut saisir le champ Nom";
+            $erreurs . "Il faut saisir le champ Nom. ";
         }
         if ($rue == "") {
-            $erreurs[] = "Il faut saisir le champ Adresse";
+            $erreurs . "Il faut saisir le champ Rue. ";
         }
         if ($ville == "") {
-            $erreurs[] = "Il faut saisir le champ Ville";
+            $erreurs . "Il faut saisir le champ Ville. ";
         }
         if ($cp == "") {
-            $erreurs[] = "Il faut saisir le champ Code postal";
+            $erreurs = "Il faut saisir le champ Code postal. ";
         } else if (!estUnCp($cp)) {
-            $erreurs[] = "erreur de code postal";
+            $erreurs . "Erreur de code postal. ";
         }
         return $erreurs;
     }

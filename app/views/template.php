@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="public/css/main.css">
     <link href="https://fonts.cdnfonts.com/css/agile-jewelry-personal-use" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/heldane-text" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js" integrity="sha256-a2yjHM4jnF9f54xUQakjZGaqYs/V1CYvWpoqZzC2/Bw=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.spritely/0.6.8/jquery.spritely.min.js"></script>
 </head>
 
 <body>
@@ -41,7 +43,7 @@
         <?php
         // Controleur de vues
         // Selon le cas d'utilisation, j'inclus un controleur ou simplement une vue
-        if (isset($message) and !empty($message)) {
+        if (isset($message) and !empty($message) and !is_array($message)) {
             echo $message;
         }
         switch ($uc) {
@@ -63,7 +65,7 @@
             case 'panier':
                 include "app/views/v_panier.php";
                 break;
-            case 'modifInfos':
+            case 'modifierInfos':
                 include "app/views/v_modifInfos.php";
                 break;
             case 'boutique':

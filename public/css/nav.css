@@ -45,6 +45,7 @@
   background-color: var(--primary-color);
   font-family: var(--title-font);
   color: var(--secondary-color);
+  font-size: 1.2rem;
 }
 
 .footer-contact {

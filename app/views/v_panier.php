@@ -1,6 +1,12 @@
 <form action="index.php?uc=commander&action=confirmerCommande" method="POST">
     <section class="basic-section section-panier">
         <?php
+        if (!$infosClient["est_livrable"]) : ?>
+            <p class="message">Votre ville n'est pas encore desservie.</p>
+        <?php endif; ?>
+        <?php
+        $date = new DateTime();
+        $tomorrow = $date->add(DateInterval::createFromDateString('1 day'))->format("Y-m-d");
         foreach ($lesProduitsDuPanier as $produit) :
             $idProduit = $produit["id"];
             $nomProduit = $produit["nom_produit"];
@@ -25,6 +31,10 @@
                 </div>
             </article>
         <?php endforeach ?>
+        <div>
+            <label class="text" for="date-livraison">Date de livraison : </label>
+            <input class="text" type="date" name="date-livraison" value="<?= $tomorrow ?>" min="<?= $tomorrow ?>">
+        </div>
         <button type="submit" value="confirmerCommande" name="valider" class="primary-btn">Valider la commande</button>
     </section>
 </form>

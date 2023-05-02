@@ -19,8 +19,8 @@ class M_Client
         int $adresse_id
     ) {
         $date = new DateTime();
-        $req = "INSERT INTO clients (nom_client, prenom_client, email, mdp, tel, date_creation, adresse_id)
-                VALUES (:nom, :prenom, :mail, :password_client, :phone, :date_creation, :adresse_id)";
+        $req = "INSERT INTO clients (nom_client, prenom_client, email, mdp, tel, adresse_id)
+                VALUES (:nom, :prenom, :mail, :password_client, :phone, :adresse_id)";
         $res = M_AccesDonnees::prepare($req);
         M_AccesDonnees::bindParam($res, ':nom', $nom, PDO::PARAM_STR);
         M_AccesDonnees::bindParam($res, ':prenom', $prenom, PDO::PARAM_STR);

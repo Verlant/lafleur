@@ -37,5 +37,5 @@ function estEntier($valeur)
  */
 function estUnMail($mail)
 {
-    return preg_match('#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#', $mail) == 1;
+    return preg_match("#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#", $mail) == 1;
 }

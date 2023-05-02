@@ -99,7 +99,7 @@ img {
   font-family: var(--title-font);
   border-radius: 10px;
   text-align: center;
-  padding: 20px;
+  padding: 15px;
   font-size: 1.2rem;
 }
 
@@ -257,8 +257,13 @@ iframe {
 }
 
 .message {
+  color: var(--error-color);
   margin: 0 auto;
   text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-family: var(--primary-font);
 }
 
 .bold {
@@ -297,6 +302,13 @@ iframe {
 .produit-li {
   list-style-type: disc;
   padding: 5px;
+}
+
+.boutons-espace-client {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
 }
 
 /* Panier */
@@ -420,6 +432,10 @@ iframe {
   .div-prix > .primary-btn {
     margin-top: 0;
   }
+
+  .adresse-container {
+    width: 100%;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -530,6 +546,10 @@ iframe {
   .info-produit-card {
     width: 150px;
     top: 160px;
+  }
+  .boutons-espace-client {
+    flex-direction: column;
+    gap: 10px;
   }
 }
 
