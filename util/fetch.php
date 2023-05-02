@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require '..\app\controller\C_Consultation.php';
-require '..\app\controller\C_Session.php';
+require '../app/controller/C_Consultation.php';
+require '../app/controller/C_Session.php';
 
 $session = new C_Session;
 // récupération des données JSON envoyées

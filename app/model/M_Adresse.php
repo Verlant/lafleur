@@ -13,13 +13,11 @@ class M_Adresse
     {
         // Requete d'ecriture d'une adresse
         $req = "INSERT INTO adresses
-                    (rue, date_creation, ville_id, code_postal_id)
+                    (rue, ville_id, code_postal_id)
                 VALUES
-                    (:rue, :date_creation, :ville_id, :cp_id)";
+                    (:rue, :ville_id, :cp_id)";
         $res = M_AccesDonnees::prepare($req);
-        $date = new DateTime();
         M_AccesDonnees::bindParam($res, ':rue', $rue, PDO::PARAM_STR);
-        M_AccesDonnees::bindParam($res, ':date_creation', $date->format("Y-m-d H:i:s"), PDO::PARAM_INT);
         M_AccesDonnees::bindParam($res, ':ville_id', $ville_id, PDO::PARAM_STR);
         M_AccesDonnees::bindParam($res, ':cp_id', $cp_id, PDO::PARAM_INT);
         M_AccesDonnees::execute($res);

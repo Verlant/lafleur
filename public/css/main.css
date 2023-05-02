@@ -176,6 +176,9 @@ input {
   background-color: var(--white-color);
   height: 30px;
   padding-left: 5px;
+  font-family: var(--primary-font);
+  color: var(--black-color);
+  font-size: 1.1rem;
 }
 /* A propos */
 
@@ -190,19 +193,19 @@ input {
 
 /* boutique */
 
-.aside-desktop {
+.aside-boutique {
   border-top: 1px solid var(--primary-color);
   border-bottom: 1px solid var(--primary-color);
   border-right: 1px solid var(--primary-color);
   border-radius: 0 10px 10px 0;
   position: fixed;
   left: 0;
-  top: 150px;
+  top: 25%;
   padding: 25px;
 }
 
 aside > div {
-  margin-bottom: 10px;
+  margin: 10px 0px;
 }
 
 h2 {
@@ -475,7 +478,7 @@ iframe {
 @media (max-width: 700px) {
   main {
     gap: 20px;
-    padding: 20px;
+    padding: 20px 0px;
     min-height: calc(99.9vh - 152px);
   }
   .basic-section {
@@ -492,8 +495,8 @@ iframe {
   .form-section {
     width: 80%;
   }
-  .aside-desktop {
-    top: 70px;
+  .aside-boutique {
+    /* top: 70px; */
     padding: 10px;
   }
 }
@@ -519,8 +522,8 @@ iframe {
   .form-section {
     width: 90%;
   }
-  .aside-desktop {
-    top: 70px;
+  .aside-boutique {
+    /* top: 70px; */
     padding: 5px;
   }
 }
@@ -532,7 +535,7 @@ iframe {
   span {
     scale: 0.9;
   } */
-  .aside-desktop {
+  .aside-boutique {
     padding: 5px;
   }
   .section-boutique {

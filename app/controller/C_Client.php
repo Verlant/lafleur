@@ -88,51 +88,51 @@ class C_Client
         return M_Client::getInfosClientParId($session::getIdClient());
     }
 
-    /**
-     * Appelle le modele pour insérer une nouvelle adresse de livraison dans la bdd
-     * @param String $adresse
-     * @param String $nom
-     * @param String $ville
-     * @param String $cp
-     * @param C_Session $session
-     * @return void
-     */
-    public function creerAdresse(
-        String $adresse,
-        String $nom,
-        String $ville,
-        String $cp,
-        C_Session $session
-    ): void {
+    // /**
+    //  * Appelle le modele pour insérer une nouvelle adresse de livraison dans la bdd
+    //  * @param String $adresse
+    //  * @param String $nom
+    //  * @param String $ville
+    //  * @param String $cp
+    //  * @param C_Session $session
+    //  * @return void
+    //  */
+    // public function creerAdresse(
+    //     String $adresse,
+    //     String $nom,
+    //     String $ville,
+    //     String $cp,
+    //     C_Session $session
+    // ): void {
 
-        // Démarre une transaction
-        M_AccesDonnees::beginTransaction();
+    //     // Démarre une transaction
+    //     M_AccesDonnees::beginTransaction();
 
-        // Vérifie si la ville existe deja dans la bdd
-        // Si oui ne l'ajoute pas et récupère son id
-        // Si non l'ajoute dans la bdd
-        if (M_Ville::trouveLaVille($ville) == false) {
-            $livrable = true;
-            $ville_id = M_Ville::creerVille($ville, $livrable);
-        } else {
-            $ville_id = M_Ville::trouveLaVille($ville)['id'];
-        }
+    //     // Vérifie si la ville existe deja dans la bdd
+    //     // Si oui ne l'ajoute pas et récupère son id
+    //     // Si non l'ajoute dans la bdd
+    //     if (M_Ville::trouveLaVille($ville) == false) {
+    //         $livrable = true;
+    //         $ville_id = M_Ville::creerVille($ville, $livrable);
+    //     } else {
+    //         $ville_id = M_Ville::trouveLaVille($ville)['id'];
+    //     }
 
-        // Vérifie si le code postal existe deja dans la bdd
-        // Si oui ne l'ajoute pas et récupère son id
-        // Si non l'ajoute dans la bdd
-        if (M_CodePostal::trouveLeCodePostal($cp) == false) {
-            $cp_id = M_CodePostal::creerCodePostal($cp);
-        } else {
-            $cp_id = M_CodePostal::trouveLeCodePostal($cp)['id'];
-        }
+    //     // Vérifie si le code postal existe deja dans la bdd
+    //     // Si oui ne l'ajoute pas et récupère son id
+    //     // Si non l'ajoute dans la bdd
+    //     if (M_CodePostal::trouveLeCodePostal($cp) == false) {
+    //         $cp_id = M_CodePostal::creerCodePostal($cp);
+    //     } else {
+    //         $cp_id = M_CodePostal::trouveLeCodePostal($cp)['id'];
+    //     }
 
-        $client_id = $session::getIdClient();
-        M_Adresse::creerAdresse($adresse,  $nom, $ville_id, $cp_id, $client_id);
+    //     $client_id = $session::getIdClient();
+    //     M_Adresse::creerAdresse($adresse,  $nom, $ville_id, $cp_id, $client_id);
 
-        // Commit la transaction
-        M_AccesDonnees::commit();
-    }
+    //     // Commit la transaction
+    //     M_AccesDonnees::commit();
+    // }
 
     /**
      * Retourne vrai si pas d'erreur

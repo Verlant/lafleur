@@ -14,7 +14,6 @@ class C_Session
         $mdp_bdd = $data['mdp'];
         if (password_verify($mdp, $mdp_bdd) and estEntier($data['id'])) {
             $_SESSION['id'] = $data['id'];
-            $_SESSION['pseudo'] = $data['pseudoClient'];
         } else {
             $data['id'] = false;
         }

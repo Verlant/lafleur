@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({
           action: "get_data",
           parameter1: event.target.dataset.id,
-          parameter2: quantite_vente,
         }),
         headers: {
           "Content-Type": "application/json",

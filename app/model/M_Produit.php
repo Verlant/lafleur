@@ -74,9 +74,9 @@ class M_Produit
                     *, produits.id as produit_id
                 FROM
                     produits
-                WHERE
-                    date_creation > '$dateMoisAvant' OR date_modif > '$dateMoisAvant' AND
-                date_creation < '$dateCeMois' OR date_modif < '$dateCeMois'
+                -- WHERE
+                --     date_creation > '$dateMoisAvant' OR date_modif > '$dateMoisAvant' AND
+                -- date_creation < '$dateCeMois' OR date_modif < '$dateCeMois'
                 LIMIT 5";
         $res = M_AccesDonnees::prepare($req);
         // $res->execute();

@@ -1,7 +1,7 @@
 <form action="index.php?uc=commander&action=confirmerCommande" method="POST">
     <section class="basic-section section-panier">
         <?php
-        if (!$infosClient["est_livrable"]) : ?>
+        if (isset($infosClient) and !$infosClient["est_livrable"]) : ?>
             <p class="message">Votre ville n'est pas encore desservie.</p>
         <?php endif; ?>
         <?php
@@ -25,7 +25,7 @@
                     <span class="text bold">Prix : <?= $prixProduit; ?> €</span>
                     <div>
                         <label class="text" for="quante_vente-<?= $idProduit; ?>">Quantité : </label>
-                        <input class="text" type="number" name="quantite_vente-<?= $idProduit; ?>">
+                        <input type="number" name="quantite_vente-<?= $idProduit; ?>">
                     </div>
                     <a class="primary-btn" href="index.php?uc=panier&action=supprimerUnProduit&produit=<?= $idProduit; ?>">Supprimer</a>
                 </div>
@@ -33,7 +33,7 @@
         <?php endforeach ?>
         <div>
             <label class="text" for="date-livraison">Date de livraison : </label>
-            <input class="text" type="date" name="date-livraison" value="<?= $tomorrow ?>" min="<?= $tomorrow ?>">
+            <input type="date" name="date-livraison" value="<?= $tomorrow ?>" min="<?= $tomorrow ?>">
         </div>
         <button type="submit" value="confirmerCommande" name="valider" class="primary-btn">Valider la commande</button>
     </section>

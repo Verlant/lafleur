@@ -80,7 +80,7 @@
     <footer id="footer-nav">
         <ul>
             <li class="footer-link-container">
-                <a class="footer-link" href="index.php?uc=blog">Blog</a>
+                <a class="footer-link" href="https://verlyck.needemand.com/projets_web/blog_lafleur">Blog</a>
                 <a class="footer-link" href="index.php?uc=boutique">Boutique</a>
             </li>
             <li>

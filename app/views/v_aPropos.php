@@ -20,13 +20,13 @@
             <h1>Notre adresse</h1>
             <ul>
                 <li class="text">LaFleur</li>
-                <li class="text">40 ZAC des Vautes</li>
-                <li class="text">Saint-Gély-du-Fesc</li>
-                <li class="text">34980</li>
+                <li class="text">19 Rue du Grand Pré</li>
+                <li class="text">Lourmarin</li>
+                <li class="text">84160</li>
             </ul>
         </div>
         <div class="google-map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5769.849427642041!2d3.804784610225836!3d43.69132854280037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1682704494326!5m2!1sfr!2sfr" width="600px" height="450px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6468.51747073409!2d5.360954216219698!3d43.76461762480631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12ca18e8c43ef017%3A0x37311f4ada7a48af!2sRue%20du%20Grand%20Pr%C3%A9%2C%2084160%20Lourmarin!5e0!3m2!1sfr!2sfr!4v1683025305334!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
 </section>

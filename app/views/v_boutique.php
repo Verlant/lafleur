@@ -1,4 +1,4 @@
-<aside class="aside-desktop">
+<aside class="aside-boutique">
     <div>
         <h2>Catégories</h2>
         <ul class="filtre-container">

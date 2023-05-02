@@ -36,19 +36,19 @@ $formulaireRecu = filter_input(INPUT_POST, "valider");
 if (isset($formulaireRecu)) {
     switch ($formulaireRecu) {
         case "Connexion":
-            $mail = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'mail_connexion'));
+            $mail = trim(filter_input(INPUT_POST, 'mail_connexion'));
             $password = filter_input(INPUT_POST, 'password_connexion');
             break;
         case "S'inscrire":
-            $nom =  preg_replace('/\s+/', '', strtolower(filter_input(INPUT_POST, 'nom')));
-            $prenom = preg_replace('/\s+/', '', strtolower(filter_input(INPUT_POST, 'prenom')));
-            $rue = strtolower(filter_input(INPUT_POST, 'rue'));
-            $ville = preg_replace('/\s+/', '', strtolower(filter_input(INPUT_POST, 'ville')));
-            $cp = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'cp'));
-            $mail = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'mail'));
+            $nom =  trim(strtolower(filter_input(INPUT_POST, 'nom')));
+            $prenom = trim(strtolower(filter_input(INPUT_POST, 'prenom')));
+            $rue = trim(filter_input(INPUT_POST, 'rue'));
+            $ville = trim(strtolower(filter_input(INPUT_POST, 'ville')));
+            $cp = trim(filter_input(INPUT_POST, 'cp'));
+            $mail = trim(filter_input(INPUT_POST, 'mail'));
             $password = filter_input(INPUT_POST, 'password');
             $password_verify = filter_input(INPUT_POST, 'password_verify');
-            $phone = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'phone'));
+            $phone = trim(filter_input(INPUT_POST, 'phone'));
             break;
             // case "Valider l'adresse":
             //     $nom = filter_input(INPUT_POST, 'nom');
@@ -60,19 +60,19 @@ if (isset($formulaireRecu)) {
             //     $adresse_id = filter_input(INPUT_POST, 'adresse_id');
             //     break;
         case "modifierInfos":
-            $nom = preg_replace('/\s+/', '', strtolower(filter_input(INPUT_POST, 'nom')));
-            $prenom = preg_replace('/\s+/', '', strtolower(filter_input(INPUT_POST, 'prenom')));
-            $rue = strtolower(filter_input(INPUT_POST, 'rue'));
-            $ville = preg_replace('/\s+/', '', strtolower(filter_input(INPUT_POST, 'ville')));
-            $cp = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'cp'));
-            $mail = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'mail'));
-            $phone = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'phone'));
+            $nom = trim(strtolower(filter_input(INPUT_POST, 'nom')));
+            $prenom = trim(strtolower(filter_input(INPUT_POST, 'prenom')));
+            $rue = trim(filter_input(INPUT_POST, 'rue'));
+            $ville = trim(strtolower(filter_input(INPUT_POST, 'ville')));
+            $cp = trim(filter_input(INPUT_POST, 'cp'));
+            $mail = trim(filter_input(INPUT_POST, 'mail'));
+            $phone = trim(filter_input(INPUT_POST, 'phone'));
             break;
         case "confirmerCommande":
             $date_livraison = filter_input(INPUT_POST, "date-livraison");
             $quantites_ventes = [];
             foreach ($_POST as $input_name => $quantite_vente) {
-                $quantites_ventes[] =  preg_replace('/\s+/', '', filter_input(INPUT_POST, $input_name));
+                $quantites_ventes[] =  trim(filter_input(INPUT_POST, $input_name));
             }
             array_pop($quantites_ventes);
             break;
@@ -123,8 +123,16 @@ switch ($uc) {
         }
         $desIdProduit = $session->getLesIdProduitsDuPanier();
         $lesProduitsDuPanier = $controleur_panier->voirPanier($session, $desIdProduit);
-        $infosClient = $controleur_client->infosClient($session);
-        $uc = count($lesProduitsDuPanier) > 0 ? $uc : $message = afficheMessage("Votre panier est vide.<br/><br/>Venez visiter notre boutique !<br/><br/><a class='primary-btn' href='index.php?uc=boutique'>Boutique</a>");
+        if ($session->getIdClient() == false) {
+            $uc = "";
+            $message =
+                count($lesProduitsDuPanier) > 0
+                ? afficheMessage("Votre panier contient des articles.<br/><br/>Connectez-vous pour poursuivre votre commande.<br/><br/><a class='primary-btn' href='index.php?uc=connexion'>Connexion</a>")
+                : afficheMessage("Connectez-vous pour passer commande.<br/><br/>Votre panier est vide.<br/><br/>Venez visiter notre boutique !<br/><br/><a class='primary-btn' href='index.php?uc=boutique'>Boutique</a>");
+        } else {
+            $infosClient = $controleur_client->infosClient($session);
+            $uc = count($lesProduitsDuPanier) > 0 ? $uc : $message = afficheMessage("Votre panier est vide.<br/><br/>Venez visiter notre boutique !<br/><br/><a class='primary-btn' href='index.php?uc=boutique'>Boutique</a>");
+        }
         break;
     case 'commander':
         $controleur_client = new C_Client;

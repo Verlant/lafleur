@@ -8,10 +8,10 @@
             <h1>Vos informations</h1>
             <div class="infos-client">
                 <div class="text">
-                    <span class="bold">Nom</span> : <?= $infosClient['nom_client'] ?>
+                    <span class="bold">Nom</span> : <?= ucfirst($infosClient['nom_client']) ?>
                 </div>
                 <div class="text">
-                    <span class="bold">Prénom</span> : <?= $infosClient['prenom_client'] ?>
+                    <span class="bold">Prénom</span> : <?= ucfirst($infosClient['prenom_client']) ?>
                 </div>
                 <div class="text">
                     <span class="bold">Mail</span> : <?= $infosClient['email'] ?>
@@ -20,7 +20,7 @@
                     <span class="bold">Téléphone</span> : <?= $infosClient['tel'] ?>
                 </div>
                 <div class="text">
-                    <span class="bold">Adresse</span> : <?= $infosClient['rue'] ?>, <?= $infosClient['nom_ville'] ?>, <?= $infosClient['cp'] ?>
+                    <span class="bold">Adresse</span> : <?= $infosClient['rue'] ?>, <?= ucfirst($infosClient['nom_ville']) ?>, <?= $infosClient['cp'] ?>
                 </div>
             </div>
             <div class="boutons-espace-client">
@@ -53,7 +53,7 @@
                             $prixProduits = $produit["prix_vente"] * $produit["quantite_vente"]
                         ?>
                             <li class="produit-li">
-                                <?= $produit["quantite_vente"]; ?> <?= $produit["nom_produit"]; ?> à <?= $produit["prix_vente"]; ?> € - Total : <?= $prixProduits; ?> €
+                                <?= $produit["quantite_vente"]; ?> <?= ucfirst($produit["nom_produit"]); ?> à <?= $produit["prix_vente"]; ?> € - Total : <?= $prixProduits; ?> €
                             </li>
                         <?php endforeach ?>
                     </ul>
