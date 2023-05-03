@@ -7,7 +7,6 @@
  */
 class M_Produit
 {
-
     /**
      * Retourne sous forme d'un tableau associatif tous les produits
      *
@@ -16,7 +15,7 @@ class M_Produit
     public static function trouveLesProduits()
     {
         $req = "SELECT
-                        nom_produit, produit_id, prix_vente, quantite_fleur, quantite_stock
+                    nom_produit, produit_id, prix_vente
                 FROM 
                     produits 
                 JOIN 
@@ -27,6 +26,30 @@ class M_Produit
         M_AccesDonnees::execute($res);
         $lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
         return $lesLignes;
+    }
+
+    /**
+     * Retourne le produit
+     * @param int $id
+     * @return Array un tableau associatif
+     */
+    public static function trouveLeProduit(int $id)
+    {
+        $req = "SELECT
+                    nom_produit, produit_id, prix_vente, quantite_fleur, quantite_stock, nom_fleur, nom_couleur
+                FROM 
+                    produits 
+                JOIN 
+                    fleur_produit ON produits.id = produit_id
+                JOIN 
+                    fleurs ON fleur_id = fleurs.id
+                JOIN
+                    couleurs ON couleur_id = couleurs.id
+                WHERE produit_id = $id";
+        $res = M_AccesDonnees::prepare($req);
+        M_AccesDonnees::execute($res);
+        $produit = $res->fetchAll(PDO::FETCH_ASSOC);
+        return $produit;
     }
 
     /**
@@ -41,18 +64,17 @@ class M_Produit
         $lesProduits = array();
         if ($nbProduits != 0) {
             foreach ($desIdProduits as $unIdProduit) {
-                $req = "SELECT 
-                            *
-                        FROM
-                            produits
-                        -- JOIN 
-                        --     fleur_produit ON produit_id = produits.id
-                        -- JOIN 
-                        --     fleurs ON fleur_id = fleurs.id
-                        -- JOIN
-                        --     couleurs ON couleur_id = couleurs.id
-                        WHERE
-                            produits.id = '$unIdProduit'";
+                $req = "SELECT
+                            nom_produit, produits.id AS id, prix_vente, quantite_fleur, quantite_stock, nom_fleur, nom_couleur
+                        FROM 
+                            produits 
+                        JOIN 
+                            fleur_produit ON produits.id = produit_id
+                        JOIN 
+                            fleurs ON fleur_id = fleurs.id
+                        JOIN
+                            couleurs ON couleur_id = couleurs.id
+                        WHERE produit_id = $unIdProduit";
                 $res = M_AccesDonnees::prepare($req);
                 // $res->execute();
                 M_AccesDonnees::execute($res);
@@ -64,7 +86,7 @@ class M_Produit
     }
 
     /**
-     * Retourne les derniers produits acquis ou modifié le mois dernier
+     * Retourne les 5 derniers produits ajouté à la bdd
      *
      * @return Array un tableau associatif
      */
@@ -75,12 +97,13 @@ class M_Produit
         $today->sub(new DateInterval("P1M"));
         $dateMoisAvant = $today->format("Y-d-m H:i:s");
         $req = "SELECT
-                    *, produits.id as produit_id
+                    nom_produit, produits.id as id, prix_vente
                 FROM
                     produits
                 -- WHERE
                 --     date_creation > '$dateMoisAvant' OR date_modif > '$dateMoisAvant' AND
                 -- date_creation < '$dateCeMois' OR date_modif < '$dateCeMois'
+                ORDER BY date_creation DESC
                 LIMIT 5";
         $res = M_AccesDonnees::prepare($req);
         // $res->execute();
@@ -100,7 +123,7 @@ class M_Produit
     public static function trouveLesProduitsDeCategorie($idCategorie)
     {
         $req = "SELECT
-                    *, produits.id as produit_id
+                    nom_produit, produits.id as produit_id, prix_vente
                 FROM
                     produits
                 JOIN
@@ -124,7 +147,7 @@ class M_Produit
     public static function trouveLesProduitsDeCouleur($idCouleur)
     {
         $req = "SELECT
-                    *, produits.id as produit_id
+                    nom_produit, produit_id, prix_vente
                 FROM
                     produits
                 JOIN 

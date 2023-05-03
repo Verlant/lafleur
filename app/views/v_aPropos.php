@@ -2,7 +2,7 @@
     <div class="basic-section">
         <div class="content-section">
             <h1>Votre fleuriste</h1>
-            <img class="img-apropos" src="public/img/apropos.svg" alt="image d'une fleuriste">
+            <img src="public/img/apropos.svg" alt="image d'une fleuriste">
         </div>
         <div class="content-section">
             <p class="text">

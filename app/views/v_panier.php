@@ -1,7 +1,7 @@
 <form action="index.php?uc=commander&action=confirmerCommande" method="POST">
     <section class="basic-section section-panier">
         <?php
-        if (isset($infosClient) and !$infosClient["est_livrable"]) : ?>
+        if (!$infosClient["est_livrable"]) : ?>
             <p class="message">Votre ville n'est pas encore desservie.</p>
         <?php endif; ?>
         <?php

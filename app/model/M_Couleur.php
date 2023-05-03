@@ -16,7 +16,7 @@ class M_Couleur
     public static function trouveLesCouleurs()
     {
         $req = "SELECT
-                    *
+                    nom_couleur, couleur_id
                 FROM
                     produits
                 JOIN 

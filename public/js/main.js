@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  let quantite_vente;
-  const logoPanier = document.querySelectorAll(".logo-panier");
-  logoPanier.forEach((element) => {
+  const addPanier = document.querySelectorAll(".add-panier");
+  addPanier.forEach((element) => {
     element.addEventListener("click", (event) => {
       fetch("util/fetch.php", {
         method: "POST",

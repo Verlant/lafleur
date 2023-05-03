@@ -16,7 +16,7 @@ class M_Categorie
     public static function trouveLesCategories()
     {
         $req = "SELECT
-                    *
+                    nom_categorie, categorie_id
                 FROM
                     categories
                 JOIN

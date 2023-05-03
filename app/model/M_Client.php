@@ -54,7 +54,7 @@ class M_Client
      */
     public static function getInfoClientParMail(String $mail): array | false
     {
-        $req = "SELECT * FROM clients WHERE email = :mail";
+        $req = "SELECT id, mdp FROM clients WHERE email = :mail";
         $res = M_AccesDonnees::prepare($req);
         M_AccesDonnees::bindParam($res, ':mail', $mail, PDO::PARAM_STR);
         M_AccesDonnees::execute($res);
@@ -70,7 +70,7 @@ class M_Client
     public static function getInfosClientParId(int $id): array | false
     {
         $req = "SELECT
-                    *
+                    nom_client, prenom_client, email, tel, rue, nom_ville, cp, est_livrable
                 FROM
                     clients
                 JOIN

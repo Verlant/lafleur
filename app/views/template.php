@@ -53,6 +53,9 @@
             case 'boutique':
                 include "app/views/v_boutique.php";
                 break;
+            case 'produit':
+                include "app/views/v_produit.php";
+                break;
             case 'aPropos':
                 include "app/views/v_aPropos.php";
                 break;

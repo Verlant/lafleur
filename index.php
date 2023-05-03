@@ -115,6 +115,10 @@ switch ($uc) {
         $lesCategories = $controleur->toutesLesCategories();
         $lesCouleurs = $controleur->toutesLesCouleurs();
         break;
+    case 'produit':
+        $controleur = new C_Consultation();
+        $produit = $controleur->trouveLeProduit($idProduit);
+        break;
     case 'panier':
         $controleur_panier = new C_GestionPanier();
         $controleur_client = new C_Client;
@@ -152,14 +156,14 @@ switch ($uc) {
             header('Location: index.php?uc=accueil');
             exit();
         } else if ($action == 'modifierInfos') {
-            $erreursSaisieAdresse = $controleur->adresseEstValide($nom, $rue, $ville, $cp);
-            if (empty($erreursSaisieAdresse) and $cp != "00000") {
-                $controleur->creerAdresse($rue,  $nom,  $ville,  $cp, $session);
-            } else if ($cp == "00000") {
-                $message = afficheMessage("Le code postal 00000 n'existe pas.");
-            } else {
-                $message = afficheMessage($erreursSaisieAdresse);
-            }
+            // $erreursSaisieAdresse = $controleur->adresseEstValide($nom, $rue, $ville, $cp);
+            // if (empty($erreursSaisieAdresse) and $cp != "00000") {
+            //     $controleur->creerAdresse($rue,  $nom,  $ville,  $cp, $session);
+            // } else if ($cp == "00000") {
+            //     $message = afficheMessage("Le code postal 00000 n'existe pas.");
+            // } else {
+            //     $message = afficheMessage($erreursSaisieAdresse);
+            // }
         }
         $infosClient = $controleur->infosClient($session);
         $commandes = $controleur->listeLesCommandes($session);

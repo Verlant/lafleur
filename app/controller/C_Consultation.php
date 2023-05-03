@@ -41,17 +41,6 @@ class C_Consultation
         } else {
             return "Ce produit a été ajouté au panier.";
         }
-
-        //     // Condition nécessaire afin de garder les bons produits affiché après ajout au panier
-        //     if ($categorie > 0) {
-        //         return M_Produit::trouveLesProduitsDeCategorie($categorie);
-        //     } elseif ($couleur > 0) {
-        //         return M_Produit::trouveLesProduitsDeCouleur($couleur);
-        //     } elseif ($uc == "accueil") {
-        //         return M_Produit::trouveLesProduitsDepuis();
-        //     } else {
-        //         return M_Produit::trouveLesProduits();
-        //     }
     }
 
     /**
@@ -61,6 +50,16 @@ class C_Consultation
     public function tousLesProduits()
     {
         return M_Produit::trouveLesProduits();
+    }
+
+    /**
+     * Renvoie le produit
+     * @param int $id
+     * @return Array
+     */
+    public function trouveLeProduit(int $id)
+    {
+        return M_Produit::trouveLeProduit($id);
     }
 
     /**
