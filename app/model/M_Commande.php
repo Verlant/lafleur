@@ -53,7 +53,7 @@ class M_Commande
      */
     public static function listeDesCommandes(int $client_id): array | false
     {
-        $req = "SELECT *
+        $req = "SELECT id, date_commande, date_livraison, frais_livraison
                 FROM commandes
                 -- JOIN commande ON commande_id = commande.id  
                 -- JOIN produits ON produit_id = produits.id
@@ -75,7 +75,7 @@ class M_Commande
      */
     public static function trouveLesProduitsParCommande(int $id_commande): array | false
     {
-        $req = "SELECT *
+        $req = "SELECT produits.id AS produit_id, prix_vente, quantite_vente, nom_produit
                 FROM commande_produit
                 JOIN commandes ON commande_id = commandes.id  
                 JOIN produits ON produit_id = produits.id

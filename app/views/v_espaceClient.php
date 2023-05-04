@@ -53,7 +53,7 @@
                             $prixProduits = $produit["prix_vente"] * $produit["quantite_vente"]
                         ?>
                             <li class="produit-li">
-                                <?= $produit["quantite_vente"]; ?> <?= ucfirst($produit["nom_produit"]); ?> à <?= $produit["prix_vente"]; ?> € - Total : <?= $prixProduits; ?> €
+                                <?= $produit["quantite_vente"]; ?> <a class="link-produit" href="index.php?uc=produit&produit=<?= $produit["produit_id"]; ?>"><?= ucfirst($produit["nom_produit"]); ?></a> à <?= $produit["prix_vente"]; ?> € - Total : <?= $prixProduits; ?> €
                             </li>
                         <?php endforeach ?>
                     </ul>

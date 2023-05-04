@@ -8,24 +8,26 @@
         $date = new DateTime();
         $tomorrow = $date->add(DateInterval::createFromDateString('1 day'))->format("Y-m-d");
         foreach ($lesProduitsDuPanier as $produit) :
-            $idProduit = $produit["id"];
-            $nomProduit = $produit["nom_produit"];
-            $prixProduit = $produit["prix_vente"];
+            $idProduit = $produit[0]["produit_id"];
+            $nomProduit = $produit[0]["nom_produit"];
+            $prixProduit = $produit[0]["prix_vente"];
         ?>
             <article class="article-panier ">
                 <img src="public/img/produit1.jpg" alt="photo du produit">
                 <div class="description-container">
                     <h2 class="text-center"><?= $nomProduit; ?></h2>
-                    <span class="text description">Description :</span>
-                    <p class="text description">Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.
-                        Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.
-                    </p>
+                    <span class="text description">Composition du produit</span>
+                    <ul>
+                        <?php foreach ($produit as $ligneProduit) : ?>
+                            <li class="text"><?= $ligneProduit["quantite_fleur"]; ?> <?= ucfirst($ligneProduit["nom_fleur"]); ?> <?= $ligneProduit["nom_couleur"]; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
                 <div class="div-prix">
                     <span class="text bold">Prix : <?= $prixProduit; ?> €</span>
                     <div>
                         <label class="text" for="quante_vente-<?= $idProduit; ?>">Quantité : </label>
-                        <input type="number" name="quantite_vente-<?= $idProduit; ?>">
+                        <input type="number" name="quantite_vente-<?= $idProduit; ?>" value="1">
                     </div>
                     <a class="primary-btn" href="index.php?uc=panier&action=supprimerUnProduit&produit=<?= $idProduit; ?>">Supprimer</a>
                 </div>
