@@ -48,7 +48,7 @@ if (isset($formulaireRecu)) {
             $mail = trim(filter_input(INPUT_POST, 'mail'));
             $password = filter_input(INPUT_POST, 'password');
             $password_verify = filter_input(INPUT_POST, 'password_verify');
-            $phone = trim(filter_input(INPUT_POST, 'phone'));
+            $phone = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'phone'));
             break;
             // case "Valider l'adresse":
             //     $nom = filter_input(INPUT_POST, 'nom');
@@ -60,13 +60,15 @@ if (isset($formulaireRecu)) {
             //     $adresse_id = filter_input(INPUT_POST, 'adresse_id');
             //     break;
         case "modifierInfos":
-            $nom = trim(strtolower(filter_input(INPUT_POST, 'nom')));
+            $nom =  trim(strtolower(filter_input(INPUT_POST, 'nom')));
             $prenom = trim(strtolower(filter_input(INPUT_POST, 'prenom')));
             $rue = trim(filter_input(INPUT_POST, 'rue'));
             $ville = trim(strtolower(filter_input(INPUT_POST, 'ville')));
             $cp = trim(filter_input(INPUT_POST, 'cp'));
             $mail = trim(filter_input(INPUT_POST, 'mail'));
-            $phone = trim(filter_input(INPUT_POST, 'phone'));
+            $password = filter_input(INPUT_POST, 'password');
+            $password_verify = filter_input(INPUT_POST, 'password_verify');
+            $phone = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'phone'));
             break;
         case "confirmerCommande":
             $date_livraison = filter_input(INPUT_POST, "date-livraison");
@@ -161,13 +163,25 @@ switch ($uc) {
             exit();
         } else if ($action == 'modifierInfos') {
             // $erreursSaisieAdresse = $controleur->adresseEstValide($nom, $rue, $ville, $cp);
-            // if (empty($erreursSaisieAdresse) and $cp != "00000") {
-            //     $controleur->creerAdresse($rue,  $nom,  $ville,  $cp, $session);
-            // } else if ($cp == "00000") {
-            //     $message = afficheMessage("Le code postal 00000 n'existe pas.");
-            // } else {
-            //     $message = afficheMessage($erreursSaisieAdresse);
-            // }
+            if (empty($erreursSaisieAdresse) and $cp != "00000" and $session->getIdClient() != false) {
+                $id_client = $session->getIdClient();
+                $controleur->modifInfos(
+                    $nom,
+                    $prenom,
+                    $rue,
+                    $ville,
+                    $cp,
+                    $mail,
+                    $password,
+                    $password_verify,
+                    $phone,
+                    $id_client,
+                );
+            } else if ($cp == "00000") {
+                $message = afficheMessage("Le code postal 00000 n'existe pas.");
+            } else {
+                $message = afficheMessage($erreursSaisieAdresse);
+            }
         }
         $infosClient = $controleur->infosClient($session);
         $commandes = $controleur->listeLesCommandes($session);

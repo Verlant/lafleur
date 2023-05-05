@@ -8,7 +8,7 @@ class M_Client
      * @param String $pseudo
      * @param String $mdp
      * @param String $nomPrenom
-     * @return int|bool
+     * @return int
      */
     public static function creerCompteClient(
         String $nom,
@@ -17,8 +17,7 @@ class M_Client
         String $password_client,
         String $phone,
         int $adresse_id
-    ) {
-        $date = new DateTime();
+    ): int {
         $req = "INSERT INTO clients (nom_client, prenom_client, email, mdp, tel, adresse_id)
                 VALUES (:nom, :prenom, :mail, :password_client, :phone, :adresse_id)";
         $res = M_AccesDonnees::prepare($req);
@@ -32,18 +31,39 @@ class M_Client
         return M_AccesDonnees::lastInsertId();
     }
 
-    // public function modifCompteClient(String $mail, String $pseudo, String $mdp, String $nomPrenom)
-    // {
-    //     $req = "UPDATE client (mailClient, pseudoClient, motDePasse, nomPrenomClient)
-    //             VALUES (:mail, :pseudo, :mdp, :nomPrenom)";
-    //     $res = M_AccesDonnees::prepare($req);
-    //     M_AccesDonnees::bindParam($res, ':mail', $mail, PDO::PARAM_STR);
-    //     M_AccesDonnees::bindParam($res, ':pseudo', $pseudo, PDO::PARAM_STR);
-    //     M_AccesDonnees::bindParam($res, ':mdp', $mdp, PDO::PARAM_STR);
-    //     M_AccesDonnees::bindParam($res, ':nomPrenom', $nomPrenom, PDO::PARAM_STR);
-    //     M_AccesDonnees::execute($res);
-    //     return M_AccesDonnees::lastInsertId();
-    // }
+    /**
+     * Modifie les infos du client dans la bdd
+     */
+    public static function modifInfos(
+        String $nom,
+        String $prenom,
+        String $mail,
+        String $password_client,
+        String $phone,
+        int $adresse_id,
+        int $id_client
+    ): void {
+        $date = new DateTime();
+        $now =  $date->format('Y-m-d H:i:s');
+        $req = "UPDATE clients
+                SET nom_client = :nom,
+                    prenom_client = :prenom,
+                    email = :mail,
+                    mdp = :password_client,
+                    tel = :phone,
+                    date_modif = :date_modif,
+                    adresse_id = :adresse_id
+                WHERE id = $id_client";
+        $res = M_AccesDonnees::prepare($req);
+        M_AccesDonnees::bindParam($res, ':nom', $nom, PDO::PARAM_STR);
+        M_AccesDonnees::bindParam($res, ':prenom', $prenom, PDO::PARAM_STR);
+        M_AccesDonnees::bindParam($res, ':mail', $mail, PDO::PARAM_STR);
+        M_AccesDonnees::bindParam($res, ':password_client', $password_client, PDO::PARAM_STR);
+        M_AccesDonnees::bindParam($res, ':phone', $phone, PDO::PARAM_STR);
+        M_AccesDonnees::bindParam($res, ':date_modif', $now, PDO::PARAM_STR);
+        M_AccesDonnees::bindParam($res, ':adresse_id', $adresse_id, PDO::PARAM_INT);
+        M_AccesDonnees::execute($res);
+    }
 
     /**
      * Effectue une requete de lecture en fonction de l'adresse mail d'un client afin de récupérer son id pseudo et mdp

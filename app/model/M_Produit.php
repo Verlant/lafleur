@@ -32,7 +32,7 @@ class M_Produit
     public static function trouveLeProduit(int $id)
     {
         $req = "SELECT
-                    nom_produit, produit_id, prix_vente, quantite_fleur, quantite_stock, nom_fleur, nom_couleur
+                    nom_produit, produit_id, prix_vente, quantite_fleur, quantite_stock, nom_fleur, nom_couleur, nom_unite
                 FROM 
                     produits 
                 JOIN 
@@ -41,6 +41,8 @@ class M_Produit
                     fleurs ON fleur_id = fleurs.id
                 JOIN
                     couleurs ON couleur_id = couleurs.id
+                JOIN
+                    unites ON unite_id = unites.id
                 WHERE produit_id = $id";
         $res = M_AccesDonnees::prepare($req);
         M_AccesDonnees::execute($res);

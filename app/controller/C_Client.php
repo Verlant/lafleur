@@ -58,8 +58,6 @@ class C_Client
             } else {
                 $adresse_id = M_Adresse::trouveAdresse($rue, $ville_id, $cp_id)['id'];
             }
-            // var_dump($adresse_id);
-            // die;
             $password = password_hash($password, PASSWORD_BCRYPT);
             M_Client::creerCompteClient(
                 $nom,
@@ -68,6 +66,77 @@ class C_Client
                 $password,
                 $phone,
                 $adresse_id
+            );
+
+            // Commit la transaction
+            M_AccesDonnees::commit();
+            return true;
+        }
+    }
+
+    /**
+     * Appelle le modele pour modifier les infos client dans la bdd
+     * en fonction des données rentré dans le formulaire d'inscription
+     * @param String $nom
+     * @param String $prenom
+     * @param String $rue
+     * @param String $ville
+     * @return bool
+     */
+    public function modifInfos(
+        String $nom,
+        String $prenom,
+        String $rue,
+        String $ville,
+        String $cp,
+        String $mail,
+        String $password,
+        String $password_verify,
+        String $phone,
+        int $id_client
+    ): bool {
+        if ($password != $password_verify || M_Client::getInfoClientParMail($mail) != false) {
+            return false;
+        } else {
+            // Démarre une transaction
+            M_AccesDonnees::beginTransaction();
+
+            // Vérifie si la ville existe deja dans la bdd
+            // Si oui ne l'ajoute pas et récupère son id
+            // Si non l'ajoute dans la bdd
+            if (M_Ville::trouveLaVille($ville) == false) {
+                $livrable = 0;
+                $ville_id = M_Ville::creerVille($ville, $livrable);
+            } else {
+                $ville_id = M_Ville::trouveLaVille($ville)['id'];
+            }
+
+            // Vérifie si le code postal existe deja dans la bdd
+            // Si oui ne l'ajoute pas et récupère son id
+            // Si non l'ajoute dans la bdd
+            if (M_CodePostal::trouveLeCodePostal($cp) == false) {
+                $cp_id = M_CodePostal::creerCodePostal($cp);
+            } else {
+                $cp_id = M_CodePostal::trouveLeCodePostal($cp)['id'];
+            }
+
+            // Vérifie si l'adresse existe deja dans la bdd
+            // Si oui ne l'ajoute pas et récupère son id
+            // Si non l'ajoute dans la bdd
+            if (M_Adresse::trouveAdresse($rue, $ville_id, $cp_id) == false) {
+                $adresse_id = M_Adresse::creerAdresse($rue, $ville_id, $cp_id);
+            } else {
+                $adresse_id = M_Adresse::trouveAdresse($rue, $ville_id, $cp_id)['id'];
+            }
+            $password = password_hash($password, PASSWORD_BCRYPT);
+            M_Client::modifInfos(
+                $nom,
+                $prenom,
+                $mail,
+                $password,
+                $phone,
+                $adresse_id,
+                $id_client
             );
 
             // Commit la transaction
@@ -87,52 +156,6 @@ class C_Client
     {
         return M_Client::getInfosClientParId($session::getIdClient());
     }
-
-    // /**
-    //  * Appelle le modele pour insérer une nouvelle adresse de livraison dans la bdd
-    //  * @param String $adresse
-    //  * @param String $nom
-    //  * @param String $ville
-    //  * @param String $cp
-    //  * @param C_Session $session
-    //  * @return void
-    //  */
-    // public function creerAdresse(
-    //     String $adresse,
-    //     String $nom,
-    //     String $ville,
-    //     String $cp,
-    //     C_Session $session
-    // ): void {
-
-    //     // Démarre une transaction
-    //     M_AccesDonnees::beginTransaction();
-
-    //     // Vérifie si la ville existe deja dans la bdd
-    //     // Si oui ne l'ajoute pas et récupère son id
-    //     // Si non l'ajoute dans la bdd
-    //     if (M_Ville::trouveLaVille($ville) == false) {
-    //         $livrable = true;
-    //         $ville_id = M_Ville::creerVille($ville, $livrable);
-    //     } else {
-    //         $ville_id = M_Ville::trouveLaVille($ville)['id'];
-    //     }
-
-    //     // Vérifie si le code postal existe deja dans la bdd
-    //     // Si oui ne l'ajoute pas et récupère son id
-    //     // Si non l'ajoute dans la bdd
-    //     if (M_CodePostal::trouveLeCodePostal($cp) == false) {
-    //         $cp_id = M_CodePostal::creerCodePostal($cp);
-    //     } else {
-    //         $cp_id = M_CodePostal::trouveLeCodePostal($cp)['id'];
-    //     }
-
-    //     $client_id = $session::getIdClient();
-    //     M_Adresse::creerAdresse($adresse,  $nom, $ville_id, $cp_id, $client_id);
-
-    //     // Commit la transaction
-    //     M_AccesDonnees::commit();
-    // }
 
     /**
      * Retourne vrai si pas d'erreur

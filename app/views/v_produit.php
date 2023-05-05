@@ -10,7 +10,11 @@
                 if ($ligneProduit["quantite_stock"] < $ligneProduit["quantite_fleur"]) {
                 }
             ?>
-                <li class="text"><?= $ligneProduit["quantite_fleur"]; ?> <?= ucfirst($ligneProduit["nom_fleur"]); ?> <?= $ligneProduit["nom_couleur"]; ?></li>
+                <?php if ($ligneProduit["quantite_fleur"] == 1 or $ligneProduit["nom_unite"] == "gr") : ?>
+                    <li class="text"><?= $ligneProduit["quantite_fleur"]; ?> <?= $ligneProduit["nom_unite"]; ?> - <?= ucfirst($ligneProduit["nom_fleur"]); ?> <?= $ligneProduit["nom_couleur"]; ?></li>
+                <?php else : ?>
+                    <li class="text"><?= $ligneProduit["quantite_fleur"]; ?> <?= $ligneProduit["nom_unite"]; ?>s - <?= ucfirst($ligneProduit["nom_fleur"]); ?> <?= $ligneProduit["nom_couleur"]; ?></li>
+                <?php endif; ?>
             <?php endforeach; ?>
         </ul>
         <div class="flex-center">

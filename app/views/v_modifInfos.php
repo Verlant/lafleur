@@ -13,6 +13,10 @@
         <input type="text" name="cp">
         <label class="text" for="mail">Email</label>
         <input type="text" name="mail">
+        <label class="text" for="password">Mot de passe</label>
+        <input id="password" class="text password" type="password" name="password">
+        <label class="text" for="password_verify">Confirmation mot de passe</label>
+        <input id="password_verify" class="text password" type="password" name="password_verify">
         <label class="text" for="phone">Téléphone</label>
         <input type="text" name="phone">
         <button type="submit" value="modifierInfos" name="valider" class="primary-btn">Valider</button>
