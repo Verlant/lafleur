@@ -1,6 +1,6 @@
 <article class="produit">
     <div class="img-container">
-        <img class="img-produit" src="public/img/produit1.jpg" alt="photo d'un bouquet">
+        <img class="img-produit" src="public/img/produit-<?= $produit[0]["produit_id"]; ?>.jpg" alt="photo de fleurs">
     </div>
     <div class="infos-produit">
         <h1 class="nom-produit"><?= $produit[0]["nom_produit"]; ?></h1>

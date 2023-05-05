@@ -177,6 +177,7 @@ switch ($uc) {
                     $phone,
                     $id_client,
                 );
+                $message = afficheMessage("Vos informations ont bien été enregistrées");
             } else if ($cp == "00000") {
                 $message = afficheMessage("Le code postal 00000 n'existe pas.");
             } else {

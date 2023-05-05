@@ -13,7 +13,7 @@
             $prixProduit = $produit[0]["prix_vente"];
         ?>
             <article class="article-panier ">
-                <img src="public/img/produit1.jpg" alt="photo du produit">
+                <img class="img-produit" src="public/img/produit-<?= $idProduit; ?>.jpg" alt="photo de fleurs">
                 <div class="description-container">
                     <h2 class="text-center"><?= $nomProduit; ?></h2>
                     <span class="text description">Composition du produit</span>

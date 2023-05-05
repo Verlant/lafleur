@@ -48,7 +48,7 @@
         $produitDispo = $controleur->produitEstDisponible($idProduit);
     ?>
         <article class="card">
-            <a href="index.php?uc=produit&produit=<?= $idProduit ?>"><img class="img-produit" src="public/img/produit1.jpg" alt="image de bouquet"></a>
+            <a href="index.php?uc=produit&produit=<?= $idProduit ?>"><img class="img-produit" src="public/img/produit-<?= $idProduit; ?>.jpg" alt="photo de fleurs"></a>
             <span class="info-produit-card">
                 <p class="nom-produit-card"><?= $nomProduit; ?> </p>
                 <p class="text-center"><?= $prixVente; ?> €</p>
