@@ -18,8 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
           }
           return response.json();
         })
-        .then((data) => {
-          alert(data);
+        .then((message) => {
+          console.log(message);
+          alert(message);
         })
         .catch((error) => {
           alert(

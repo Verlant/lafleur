@@ -18,10 +18,11 @@ if ($request_data->action === 'get_data') {
 
     if ($produitDispo) {
         // appel de la fonction get_data avec les paramètres fournis
-        $data = $controleur->ajouterAuPanier($session, $idProduit);;
+        $message = $controleur->ajouterAuPanier($session, $idProduit);
+
         // retourner les données encodées en JSON
         header('Content-Type: application/json');
-        echo json_encode($data);
+        echo json_encode($message);
     } else {
         // retourner les données encodées en JSON
         header('Content-Type: application/json');

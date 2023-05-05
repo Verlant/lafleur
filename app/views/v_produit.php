@@ -15,7 +15,11 @@
         </ul>
         <div class="flex-center">
             <p class="text"><?= $produit[0]["prix_vente"]; ?> €</p>
-            <span class="primary-btn add-panier" data-id="<?= $produit[0]["produit_id"]; ?>">Ajouter au panier</span>
+            <?php if ($produitDispo) : ?>
+                <span class="primary-btn add-panier" data-id="<?= $produit[0]["produit_id"]; ?>">Ajouter au panier</span>
+            <?php else : ?>
+                <span class="primary-btn add-panier produit-indisponible" data-id="<?= $produit[0]["produit_id"]; ?>">Ajouter au panier</span>
+            <?php endif; ?>
         </div>
     </div>
 </article>

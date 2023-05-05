@@ -24,13 +24,18 @@
             $idProduit = $unProduit['id'];
             $nomProduit = $unProduit['nom_produit'];
             $prixVente = $unProduit['prix_vente'];
+            $produitDispo = $controleur->produitEstDisponible($idProduit);
         ?>
-            <article class="card">
+            <article class="card card-accueil">
                 <a href="index.php?uc=produit&produit=<?= $idProduit ?>"><img class="img-produit" src="public/img/produit1.jpg" alt="image de bouquet"></a>
                 <span class="info-produit-card">
                     <p class="nom-produit-card"><?= $nomProduit; ?> </p>
                     <p class="text-center"><?= $prixVente; ?> €</p>
-                    <img data-id="<?= $idProduit ?>" class="logo-panier add-panier" src="public/img/panier.svg" alt="logo de panier">
+                    <?php if ($produitDispo) : ?>
+                        <img data-id="<?= $idProduit ?>" class="logo-panier add-panier" src="public/img/panier.svg" alt="logo de panier">
+                    <?php else : ?>
+                        <img data-id="<?= $idProduit ?>" class="logo-panier add-panier produit-indisponible" src="public/img/panier.svg" alt="logo de panier">
+                    <?php endif; ?>
                 </span>
             </article>
         <?php endforeach ?>

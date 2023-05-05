@@ -118,6 +118,10 @@ switch ($uc) {
     case 'produit':
         $controleur = new C_Consultation();
         $produit = $controleur->trouveLeProduit($idProduit);
+        $produitDispo = $controleur->produitEstDisponible($idProduit);
+        if (!$produitDispo) {
+            $message = afficheMessage("Désolé, ce produit est en rupture de stock.");
+        }
         break;
     case 'panier':
         $controleur_panier = new C_GestionPanier();
