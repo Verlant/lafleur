@@ -6,7 +6,10 @@
         <h1 class="nom-produit"><?= $produit[0]["nom_produit"]; ?></h1>
         <p class="text">Composition du produit</p>
         <ul>
-            <?php foreach ($produit as $ligneProduit) : ?>
+            <?php foreach ($produit as $ligneProduit) :
+                if ($ligneProduit["quantite_stock"] < $ligneProduit["quantite_fleur"]) {
+                }
+            ?>
                 <li class="text"><?= $ligneProduit["quantite_fleur"]; ?> <?= ucfirst($ligneProduit["nom_fleur"]); ?> <?= $ligneProduit["nom_couleur"]; ?></li>
             <?php endforeach; ?>
         </ul>

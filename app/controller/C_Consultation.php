@@ -79,4 +79,20 @@ class C_Consultation
     {
         return M_Couleur::trouveLesCouleurs();
     }
+
+    /**
+     * Vérifie la disponibilité d'un produit
+     * @param int
+     * @return bool
+     */
+    public function produitEstDisponible(int $idProduit): bool
+    {
+        $produit = M_Produit::trouveLeProduit($idProduit);
+        foreach ($produit as $ligneProduit) {
+            if ($ligneProduit["quantite_stock"] < $ligneProduit["quantite_fleur"]) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

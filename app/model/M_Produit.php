@@ -60,21 +60,6 @@ class M_Produit
         $lesProduits = array();
         if ($nbProduits != 0) {
             foreach ($desIdProduits as $unIdProduit) {
-                // $req = "SELECT
-                //             nom_produit, produits.id AS id, prix_vente, quantite_fleur, quantite_stock, nom_fleur, nom_couleur
-                //         FROM 
-                //             produits 
-                //         JOIN 
-                //             fleur_produit ON produits.id = produit_id
-                //         JOIN 
-                //             fleurs ON fleur_id = fleurs.id
-                //         JOIN
-                //             couleurs ON couleur_id = couleurs.id
-                //         WHERE produit_id = $unIdProduit";
-                // $res = M_AccesDonnees::prepare($req);
-                // // $res->execute();
-                // M_AccesDonnees::execute($res);
-                // $unProduit = $res->fetch(PDO::FETCH_ASSOC);
                 $lesProduits[] = M_Produit::trouveLeProduit($unIdProduit);
             }
         }
