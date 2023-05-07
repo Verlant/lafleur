@@ -158,36 +158,6 @@ class C_Client
     }
 
     /**
-     * Retourne vrai si pas d'erreur
-     * Retourne un tableau contenant des messages pour chaque erreur rencontrées
-     * @param $nom : chaîne
-     * @param $rue : chaîne
-     * @param $ville : chaîne
-     * @param $cp : chaîne
-     * @param $mail : chaîne
-     * @return String : string
-     */
-    public static function adresseEstValide($nom, $rue, $ville, $cp): String
-    {
-        $erreurs = "";
-        if ($nom == "") {
-            $erreurs . "Il faut saisir le champ Nom. ";
-        }
-        if ($rue == "") {
-            $erreurs . "Il faut saisir le champ Rue. ";
-        }
-        if ($ville == "") {
-            $erreurs . "Il faut saisir le champ Ville. ";
-        }
-        if ($cp == "") {
-            $erreurs = "Il faut saisir le champ Code postal. ";
-        } else if (!estUnCp($cp)) {
-            $erreurs . "Erreur de code postal. ";
-        }
-        return $erreurs;
-    }
-
-    /**
      * Renvoie la liste des commandes passé par le cient
      * Retourne false si une erreur est rencontré lors de la requete SQL par le modele
      * @param C_Session $session

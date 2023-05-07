@@ -42,7 +42,7 @@
     <main>
         <?php
         // Controleur de vues
-        // Selon le cas d'utilisation, j'inclus un controleur ou simplement une vue
+        // Selon le cas d'utilisation, j'inclus une vue
         if (isset($message) and !empty($message) and !is_array($message)) {
             echo $message;
         }

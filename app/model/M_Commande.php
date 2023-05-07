@@ -23,9 +23,9 @@ class M_Commande
     {
         M_AccesDonnees::beginTransaction();
         $date = new DateTime();
-        $req = "INSERT INTO commandes ( date_livraison, etat_paiement, etat_livraison, frais_livraison, client_id)
+        $req_commande = "INSERT INTO commandes ( date_livraison, etat_paiement, etat_livraison, frais_livraison, client_id)
                 VALUES (:date_livraison, 'W', 'W', :frais_livraison, :client_id)";
-        $res = M_AccesDonnees::prepare($req);
+        $res = M_AccesDonnees::prepare($req_commande);
         M_AccesDonnees::bindParam($res, ':date_livraison', $date->add(DateInterval::createFromDateString('1 day'))->format("Y-m-d"), PDO::PARAM_STR);
         M_AccesDonnees::bindParam($res, ':frais_livraison', $frais_livraison, PDO::PARAM_BOOL);
         M_AccesDonnees::bindParam($res, ':client_id', $client_id, PDO::PARAM_INT);
@@ -33,13 +33,26 @@ class M_Commande
         $commande_id = M_AccesDonnees::lastInsertId();
         $i = 0;
         foreach ($listeIdproduits as $produit_id) {
-            $req = "INSERT INTO commande_produit (commande_id, produit_id, quantite_vente) VALUES (:commande_id, :produit_id, :quantite_vente)";
-            $res = M_AccesDonnees::prepare($req);
+            // Ajout d'une ligne de données dans la tbale commande_produit
+            $req_commande_produit = "INSERT INTO commande_produit (commande_id, produit_id, quantite_vente) VALUES (:commande_id, :produit_id, :quantite_vente)";
+            $res = M_AccesDonnees::prepare($req_commande_produit);
             M_AccesDonnees::bindParam($res, ':commande_id', $commande_id, PDO::PARAM_INT);
             M_AccesDonnees::bindParam($res, ':produit_id', $produit_id, PDO::PARAM_INT);
             M_AccesDonnees::bindParam($res, ':quantite_vente', $quantites_ventes[$i], PDO::PARAM_INT);
             M_AccesDonnees::execute($res);
             $i++;
+            // Modification de la quantite stock en fonction de la ligne commande_produit ajoutée
+            // $produit = M_Produit::trouveLeProduit($produit_id);
+            // foreach ($produit as $ligneProduit) {
+            //     $quantite_fleur_vendues = $ligneProduit["quantite_stock"] - $quantites_ventes[$i] * $ligneProduit["quantite_fleur"];
+            //     $req_fleur = "UPDATE fleurs
+            //                     SET quantite_stock = :quantite_stock
+            //                     WHERE id = :id_fleur";
+            //     $res = M_AccesDonnees::prepare($req_fleur);
+            //     M_AccesDonnees::bindParam($res, ':quantite_stock', $quantite_fleur_vendues, PDO::PARAM_INT);
+            //     M_AccesDonnees::bindParam($res, ':id_fleur', $ligneProduit["fleur_id"], PDO::PARAM_INT);
+            //     M_AccesDonnees::execute($res);
+            // }
         }
         M_AccesDonnees::commit();
     }

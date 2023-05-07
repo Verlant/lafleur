@@ -121,6 +121,7 @@ img {
 
 .img-produit {
   width: 100%;
+  max-width: 350px;
   min-height: 300px;
   object-fit: cover;
   border-radius: 20px;
@@ -474,15 +475,15 @@ iframe {
   .form-section {
     width: 70%;
   }
+  .article-panier {
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 760px) {
   .section-boutique {
     margin-left: 48%;
     gap: 20px;
-  }
-  .article-panier {
-    flex-direction: column;
   }
   .description-container {
     width: auto;

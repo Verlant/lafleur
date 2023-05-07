@@ -11,7 +11,6 @@ function afficheErreurs(array $msgErreurs): String
         $message . "<li>" . $erreur . "</li>";
     }
     $message . '</ul></div>';
-    // var_dump($message);
     return $message;
 }
 

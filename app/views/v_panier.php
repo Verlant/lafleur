@@ -19,9 +19,9 @@
                     <span class="text description">Composition du produit</span>
                     <ul>
                         <?php
-                        $quantiteMax = 1;
                         foreach ($produit as $ligneProduit) :
-                            $quantiteMax = $ligneProduit["quantite_stock"] / $ligneProduit["quantite_fleur"];
+                            $max = $controleur_consultation->nombreProduitsContenantFleur($ligneProduit["fleur_id"])["produits_contenant_fleur"];
+                            $quantiteMax = floor(($ligneProduit["quantite_stock"] / $ligneProduit["quantite_fleur"]) / $max);
                         ?>
                             <?php if ($ligneProduit["quantite_fleur"] == 1 or $ligneProduit["nom_unite"] == "gr") : ?>
                                 <li class="text"><?= $ligneProduit["quantite_fleur"]; ?> <?= $ligneProduit["nom_unite"]; ?> - <?= ucfirst($ligneProduit["nom_fleur"]); ?> <?= $ligneProduit["nom_couleur"]; ?></li>
@@ -35,8 +35,9 @@
                     <span class="text bold">Prix : <?= $prixProduit; ?> €</span>
                     <div>
                         <label class="text" for="quante_vente-<?= $idProduit; ?>">Quantité : </label>
-                        <input type="number" name="quantite_vente-<?= $idProduit; ?>" value="1" min="1" max="<?= $quantiteMax; ?>">
+                        <input class="quantite_vente" type="number" name="quantite_vente-<?= $idProduit; ?>" value="1" min="1" max="<?= $quantiteMax; ?> required">
                     </div>
+                    <p class="text">Maximum : <?= $quantiteMax; ?></p>
                     <a class="primary-btn" href="index.php?uc=panier&action=supprimerUnProduit&produit=<?= $idProduit; ?>">Supprimer</a>
                 </div>
             </article>

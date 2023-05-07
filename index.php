@@ -74,9 +74,14 @@ if (isset($formulaireRecu)) {
             $date_livraison = filter_input(INPUT_POST, "date-livraison");
             $quantites_ventes = [];
             foreach ($_POST as $input_name => $quantite_vente) {
-                $quantites_ventes[] =  trim(filter_input(INPUT_POST, $input_name));
+                $quantite_input = trim(filter_input(INPUT_POST, $input_name));
+                if ($quantite_input > 0 and estEntier($quantite_input)) {
+                    $quantites_ventes[] =  $quantite_input;
+                } else {
+                    $quantites_ventes = [];
+                    break;
+                }
             }
-            array_pop($quantites_ventes);
             break;
         default:
             break;
@@ -102,7 +107,7 @@ if (!isset($produitPanier) or empty($produitPanier)) {
 // Controleur principal
 switch ($uc) {
     case 'accueil':
-        $controleur = new C_Consultation();
+        $controleur = new C_Consultation;
         $lesProduits = $controleur->derniersProduitsSortis();
         break;
     case 'boutique':
@@ -118,7 +123,7 @@ switch ($uc) {
         $lesCouleurs = $controleur->toutesLesCouleurs();
         break;
     case 'produit':
-        $controleur = new C_Consultation();
+        $controleur = new C_Consultation;
         $produit = $controleur->trouveLeProduit($idProduit);
         $produitDispo = $controleur->produitEstDisponible($idProduit);
         if (!$produitDispo) {
@@ -126,8 +131,9 @@ switch ($uc) {
         }
         break;
     case 'panier':
-        $controleur_panier = new C_GestionPanier();
+        $controleur_panier = new C_GestionPanier;
         $controleur_client = new C_Client;
+        $controleur_consultation = new C_Consultation;
         if ($action == 'supprimerUnProduit') {
             $controleur_panier->supprimerUnProduit($session, $idProduit);
         }
@@ -148,12 +154,17 @@ switch ($uc) {
         $controleur_client = new C_Client;
         $infosClient = $controleur_client->infosClient($session);
         $controleur_commande = new C_Commande;
-        if ($action == 'confirmerCommande' and $infosClient["est_livrable"]) {
+        if ($action == 'confirmerCommande' and $infosClient["est_livrable"] and !empty($quantites_ventes)) {
             $message = $controleur_commande->confirmerCommande($session, $quantites_ventes);
-            header('Location: index.php?uc=espaceClient');
         } else if (!$infosClient["est_livrable"]) {
             $message = afficheMessage("Commande non valide, votre ville n'est pas encore desservie.");
+        } else {
+            $message = afficheMessage("Commande non valide, la quantité entrée doit être un nombre entier positif.");
         }
+        $infosClient = $controleur_client->infosClient($session);
+        $commandes = $controleur_client->listeLesCommandes($session);
+        $produitsParCommandes = $controleur_client->listeLesProduitsParCommandes($commandes);
+        $uc = "espaceClient";
         break;
     case 'espaceClient':
         $controleur = new C_Client;
@@ -162,8 +173,8 @@ switch ($uc) {
             header('Location: index.php?uc=accueil');
             exit();
         } else if ($action == 'modifierInfos') {
-            // $erreursSaisieAdresse = $controleur->adresseEstValide($nom, $rue, $ville, $cp);
-            if (empty($erreursSaisieAdresse) and $cp != "00000" and $session->getIdClient() != false) {
+            $erreursSaisie = infosValide($nom, $prenom, $rue, $ville, $cp, $mail, $password, $password_verify, $phone);
+            if (empty($erreursSaisie) and $session->getIdClient() != false) {
                 $id_client = $session->getIdClient();
                 $controleur->modifInfos(
                     $nom,
@@ -178,10 +189,9 @@ switch ($uc) {
                     $id_client,
                 );
                 $message = afficheMessage("Vos informations ont bien été enregistrées");
-            } else if ($cp == "00000") {
-                $message = afficheMessage("Le code postal 00000 n'existe pas.");
             } else {
-                $message = afficheMessage($erreursSaisieAdresse);
+                $message = afficheMessage($erreursSaisie);
+                $uc = "modifierInfos";
             }
         }
         $infosClient = $controleur->infosClient($session);
@@ -189,10 +199,10 @@ switch ($uc) {
         $produitsParCommandes = $controleur->listeLesProduitsParCommandes($commandes);
         break;
     case 'connexion':
-        $controleur = new C_Client();
-        if (isset($mail) and isset($password)) {
-            // $erreursSaisieAdresse = $controleur->adresseEstValide($nom, $rue, $ville, $cp);
-            if ($action == 'inscription') {
+        $controleur = new C_Client;
+        if ($action == 'inscription') {
+            $erreursSaisie = infosValide($nom, $prenom, $rue, $ville, $cp, $mail, $password, $password_verify, $phone);
+            if (empty($erreursSaisie)) {
                 if ($controleur->inscription(
                     $nom,
                     $prenom,
@@ -205,18 +215,20 @@ switch ($uc) {
                     $phone
                 )) {
                     $message = afficheMessage('Votre compte a bien été créé.');
-                } else if ($cp == "00000") {
-                    $message = afficheMessage("Le code postal 00000 n'existe pas.");
                 } else {
-                    $message = afficheMessage($erreursSaisieAdresse);
+                    $message = afficheMessage("Cette adresse mail est déjà utilisé");
                 }
-            } else if ($action == 'connexion' and estUnMail($mail) and $session->verifMotDePasse($mail, $password)) {
-                header('Location: index.php?uc=espaceClient');
-                exit();
-            } else if (!estUnMail($mail)) {
+            } else {
+                $message = afficheMessage($erreursSaisie);
+            }
+        } else if ($action == 'connexion') {
+            if (!estUnMail($mail)) {
                 $message = afficheMessage("Mail non valide. Format demandé : exemple@domaine.com");
             } else if (!$session->verifMotDePasse($mail, $password)) {
                 $message = afficheMessage('Mot de passe ou mail inconnu. Réessayez');
+            } else {
+                header('Location: index.php?uc=espaceClient');
+                exit();
             }
         }
         break;

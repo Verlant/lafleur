@@ -53,4 +53,17 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  // const inputsQuantiteVente = document.querySelectorAll(".quantite_vente");
+  // var maxValuesQuantiteVente = [];
+  // inputsQuantiteVente.forEach((input) => {
+  //   console.log(input.max);
+  //   maxValuesQuantiteVente.push(input.max);
+  //   console.log(maxValuesQuantiteVente);
+  // });
 });
+
+// function validFormCommande() {
+//   console.log(maxValuesQuantiteVente);
+//   return false;
+// }

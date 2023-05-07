@@ -95,4 +95,14 @@ class C_Consultation
         }
         return true;
     }
+
+    /**
+     * Renvoie le nombre de produit contenant cette fleur
+     * @param int $idFleur
+     * @return Array
+     */
+    public function nombreProduitsContenantFleur(int $idFleur)
+    {
+        return M_Produit::nombreProduitsContenantCetteFleur($idFleur);
+    }
 }
