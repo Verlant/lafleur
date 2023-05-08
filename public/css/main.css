@@ -13,7 +13,6 @@
   --secondary-color: #e0f19c;
   --white-color: #f7f0f7;
   --black-color: #342e34;
-  --grey-light-color: #cbc8cb;
   --grey-back-color: #757475;
   --success-color: #187a8f;
   --error-color: #8b1e2b;
@@ -54,6 +53,14 @@ main {
 
 img {
   border-radius: 10px;
+}
+
+.validation {
+  color: var(--success-color);
+}
+
+.error {
+  color: var(--error-color);
 }
 
 .basic-section {
@@ -216,6 +223,10 @@ h2 {
   padding-left: 30px;
 }
 
+.filtre-container > li {
+  padding: 3px 0;
+}
+
 .filtre-boutique {
   font-family: var(--primary-font);
   color: var(--primary-color);
@@ -235,7 +246,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 50px;
-  margin-left: 17%;
+  margin-left: 250px;
 }
 
 .nom-produit-card {
@@ -262,7 +273,6 @@ iframe {
 }
 
 .message {
-  color: var(--error-color);
   margin: 0 auto;
   text-align: center;
   font-weight: bold;
@@ -418,20 +428,26 @@ iframe {
   text-align: center;
 }
 
+.date-livraison {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* mediaqueries */
 
 @media (max-width: 1500px) {
   .section-boutique {
-    margin-left: 20%;
+    margin-left: 18%;
   }
 }
 
-@media (max-width: 1260px) {
-  .section-boutique {
-    margin-left: 28%;
-  }
+@media (max-width: 1180px) {
   .article-panier {
     min-width: 100%;
+  }
+  .section-boutique {
+    margin-left: 25%;
   }
 }
 
@@ -462,7 +478,7 @@ iframe {
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 950px) {
   .section-boutique {
     margin-left: 35%;
   }
@@ -482,7 +498,6 @@ iframe {
 
 @media (max-width: 760px) {
   .section-boutique {
-    margin-left: 48%;
     gap: 20px;
   }
   .description-container {
@@ -529,6 +544,15 @@ iframe {
   .img-container {
     margin-bottom: 20px;
   }
+  .section-boutique {
+    margin-left: 30%;
+  }
+}
+
+@media (max-width: 620px) {
+  .section-boutique {
+    margin-left: 50%;
+  }
 }
 
 @media (max-width: 500px) {
@@ -552,6 +576,9 @@ iframe {
   .nom-produit {
     font-size: 1.5rem;
   }
+  .section-boutique {
+    margin-left: 45%;
+  }
 }
 
 @media (max-width: 450px) {
@@ -562,7 +589,7 @@ iframe {
     padding: 5px;
   }
   .section-boutique {
-    margin-left: 50%;
+    margin-left: 40%;
   }
   /* .card {
     width: 150px;
@@ -582,6 +609,12 @@ iframe {
   .logo-panier {
     width: 30px;
     height: 30px;
+  }
+  .date-livraison {
+    flex-direction: column;
+  }
+  .filtre-container {
+    padding-left: 15px;
   }
 }
 

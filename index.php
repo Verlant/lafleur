@@ -124,7 +124,7 @@ switch ($uc) {
         $produit = $controleur->trouveLeProduit($idProduit);
         $produitDispo = $controleur->produitEstDisponible($idProduit);
         if (!$produitDispo) {
-            $message = afficheMessage("Désolé, ce produit est en rupture de stock.");
+            $message = afficheErreur("Désolé, ce produit est en rupture de stock.");
         }
         break;
     case 'panier':
@@ -155,9 +155,9 @@ switch ($uc) {
             $message = $controleur_commande->confirmerCommande($session, $quantites_ventes);
             header('Location: index.php?uc=espaceClient');
         } else if (!$infosClient["est_livrable"]) {
-            $message = afficheMessage("Commande non valide, votre ville n'est pas encore desservie.");
+            $message = afficheErreur("Commande non valide, votre ville n'est pas encore desservie.");
         } else {
-            $message = afficheMessage("Commande non valide, la quantité entrée doit être un nombre entier positif.");
+            $message = afficheErreur("Commande non valide, la quantité entrée doit être un nombre entier positif.");
         }
         $infosClient = $controleur_client->infosClient($session);
         $commandes = $controleur_client->listeLesCommandes($session);
@@ -186,7 +186,7 @@ switch ($uc) {
                 );
                 $message = afficheMessage("Vos informations ont bien été enregistrées");
             } else {
-                $message = afficheMessage($erreursSaisie);
+                $message = afficheErreur($erreursSaisie);
                 $uc = "modifierInfos";
             }
         }
@@ -212,16 +212,16 @@ switch ($uc) {
                 )) {
                     $message = afficheMessage('Votre compte a bien été créé.');
                 } else {
-                    $message = afficheMessage("Cette adresse mail est déjà utilisé");
+                    $message = afficheErreur("Cette adresse mail est déjà utilisé");
                 }
             } else {
-                $message = afficheMessage($erreursSaisie);
+                $message = afficheErreur($erreursSaisie);
             }
         } else if ($action == 'connexion') {
             if (!estUnMail($mail)) {
-                $message = afficheMessage("Mail non valide. Format demandé : exemple@domaine.com");
+                $message = afficheErreur("Mail non valide. Format demandé : exemple@domaine.com");
             } else if (!$session->verifMotDePasse($mail, $password)) {
-                $message = afficheMessage('Mot de passe ou mail inconnu. Réessayez');
+                $message = afficheErreur('Mot de passe ou mail inconnu. Réessayez');
             } else {
                 header('Location: index.php?uc=espaceClient');
                 exit();

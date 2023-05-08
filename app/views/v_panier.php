@@ -37,12 +37,11 @@
                         <label class="text" for="quante_vente-<?= $idProduit; ?>">Quantité : </label>
                         <input class="quantite_vente" type="number" name="quantite_vente-<?= $idProduit; ?>" value="1" min="1" max="<?= $quantiteMax; ?>" required>
                     </div>
-                    <p class="text">Maximum : <?= $quantiteMax; ?></p>
                     <a class="primary-btn" href="index.php?uc=panier&action=supprimerUnProduit&produit=<?= $idProduit; ?>">Supprimer</a>
                 </div>
             </article>
         <?php endforeach ?>
-        <div>
+        <div class="date-livraison">
             <label class="text" for="date-livraison">Date de livraison : </label>
             <input type="date" name="date-livraison" value="<?= $tomorrow ?>" min="<?= $tomorrow ?>">
         </div>

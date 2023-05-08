@@ -5,7 +5,7 @@
             <img src="public/img/event.svg" alt="image d'un évènement">
         </div>
         <div class="content-section">
-            <p class="text">Pour l'événement de la fête des mères, dimanche 4 juin 2023, une loteria sera mise en place. Pendant deux semaines, toute personne qui passera une commande sur le site pourra tenter sa chance et gagner des cadeaux.</p>
+            <p class="text">Pour l'événement de la fête des mères, dimanche 4 juin 2023, une loterie sera mise en place. Pendant deux semaines, toute personne qui passera une commande sur le site pourra tenter sa chance et gagner des cadeaux.</p>
             <p class="text">Lots à gagner pour la loterie de la fête des mères :</p>
             <ol class="text">
                 <li>1. 1000 stylos “Lafleur”</li>

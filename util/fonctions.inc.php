@@ -2,23 +2,18 @@
 
 /**
  * Affiche une liste d'erreur
- * @param array $msgErreurs
+ * @param String $msgErreurs
  */
-function afficheErreurs(array $msgErreurs): String
+function afficheErreur(String $msgErreurs): String
 {
-    $message = '<div class="erreur"><ul>';
-    foreach ($msgErreurs as $erreur) {
-        $message . "<li>" . $erreur . "</li>";
-    }
-    $message . '</ul></div>';
-    return $message;
+    return '<p class="message error">' . $msgErreurs . '</p>';
 }
 
 /**
  * Affiche un message bleu
- * @param string $msg
+ * @param String $msg
  */
-function afficheMessage(string $msg): String
+function afficheMessage(String $msg): String
 {
-    return '<p class="message">' . $msg . '</p>';
+    return '<p class="message validation">' . $msg . '</p>';
 }
