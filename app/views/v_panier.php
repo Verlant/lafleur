@@ -35,7 +35,7 @@
                     <span class="text bold">Prix : <?= $prixProduit; ?> €</span>
                     <div>
                         <label class="text" for="quante_vente-<?= $idProduit; ?>">Quantité : </label>
-                        <input class="quantite_vente" type="number" name="quantite_vente-<?= $idProduit; ?>" value="1" min="1" max="<?= $quantiteMax; ?> required">
+                        <input class="quantite_vente" type="number" name="quantite_vente-<?= $idProduit; ?>" value="1" min="1" max="<?= $quantiteMax; ?>" required>
                     </div>
                     <p class="text">Maximum : <?= $quantiteMax; ?></p>
                     <a class="primary-btn" href="index.php?uc=panier&action=supprimerUnProduit&produit=<?= $idProduit; ?>">Supprimer</a>

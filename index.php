@@ -77,9 +77,6 @@ if (isset($formulaireRecu)) {
                 $quantite_input = trim(filter_input(INPUT_POST, $input_name));
                 if ($quantite_input > 0 and estEntier($quantite_input)) {
                     $quantites_ventes[] =  $quantite_input;
-                } else {
-                    $quantites_ventes = [];
-                    break;
                 }
             }
             break;
@@ -156,6 +153,7 @@ switch ($uc) {
         $controleur_commande = new C_Commande;
         if ($action == 'confirmerCommande' and $infosClient["est_livrable"] and !empty($quantites_ventes)) {
             $message = $controleur_commande->confirmerCommande($session, $quantites_ventes);
+            header('Location: index.php?uc=espaceClient');
         } else if (!$infosClient["est_livrable"]) {
             $message = afficheMessage("Commande non valide, votre ville n'est pas encore desservie.");
         } else {

@@ -33,8 +33,8 @@ class C_Commande
         $frais_livraison = false;
         $prix_total_commande = 0;
         $i = 0;
-        foreach ($lesProduits[0] as $produit) {
-            $prix_total_commande += $produit["prix_vente"] * $quantites_ventes[$i];
+        foreach ($lesProduits as $produit) {
+            $prix_total_commande += $produit[0]["prix_vente"] * $quantites_ventes[$i];
             $i++;
         }
         if ($prix_total_commande < 50) {

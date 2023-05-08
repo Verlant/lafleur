@@ -62,10 +62,10 @@
                     <p class="text bold">Commande n°<?= $commande['id']; ?></p>
                     <?php if ($commande['frais_livraison']) : $prixTotal += 2.99 ?>
                         <p class="text bold">Total : <?= $prixTotal; ?> €</p>
-                        <p class="text">Frais de livraison : 2.99 €</p>
+                        <p class="text bold">Livraison : 2.99 €</p>
                     <?php else : ?>
                         <p class="text bold">Total : <?= $prixTotal; ?> €</p>
-                        <p class="text">Pas de frais de livraison</p>
+                        <p class="text bold">Livraison offerte</p>
                     <?php endif ?>
                 </div>
             </article>
