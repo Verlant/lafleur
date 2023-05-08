@@ -171,7 +171,7 @@ switch ($uc) {
             header('Location: index.php?uc=accueil');
             exit();
         } else if ($action == 'modifierInfos') {
-            $erreursSaisie = infosValide($nom, $prenom, $rue, $ville, $cp, $mail, $password, $password_verify, $phone);
+            $erreursSaisie = infosModifValide($nom, $prenom, $rue, $ville, $cp, $mail, $password, $password_verify, $phone);
             if (empty($erreursSaisie) and $session->getIdClient() != false) {
                 $id_client = $session->getIdClient();
                 $controleur->modifInfos(
@@ -181,10 +181,8 @@ switch ($uc) {
                     $ville,
                     $cp,
                     $mail,
-                    $password,
-                    $password_verify,
                     $phone,
-                    $id_client,
+                    $id_client
                 );
                 $message = afficheMessage("Vos informations ont bien été enregistrées");
             } else {
@@ -233,9 +231,11 @@ switch ($uc) {
     case 'aPropos':
         break;
     case 'modifierInfos':
+        $controleur = new C_Client;
+        $infosClient = $controleur->infosClient($session);
         break;
     default:
-        header('Location: index.php?uc=accueil');
+        header('Location: index.php');
         exit();
         break;
 }

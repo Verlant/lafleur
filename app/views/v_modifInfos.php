@@ -2,23 +2,19 @@
     <section class="form-section">
         <h1>Modifier vos informations</h1>
         <label class="text" for="nom">Nom</label>
-        <input required type="text" name="nom">
+        <input type="text" value="<?= ucfirst($infosClient["nom_client"]); ?>" name="nom">
         <label class="text" for="prenom">Prénom</label>
-        <input required type="text" name="prenom">
+        <input type="text" value="<?= ucfirst($infosClient["prenom_client"]); ?>" name="prenom">
         <label class="text" for="rue">Rue</label>
-        <input required type="text" name="rue">
+        <input type="text" value="<?= $infosClient["rue"]; ?>" name="rue">
         <label class="text" for="ville">Ville</label>
-        <input required type="text" name="ville">
+        <input type="text" value="<?= ucfirst($infosClient["nom_ville"]); ?>" name="ville">
         <label class="text" for="cp">Code postal</label>
-        <input required type="text" name="cp">
+        <input type="text" value="<?= $infosClient["cp"]; ?>" name="cp">
         <label class="text" for="mail">Email</label>
-        <input required type="text" name="mail">
-        <label class="text" for="password">Mot de passe</label>
-        <input required id="password" class="text password" type="password" name="password">
-        <label class="text" for="password_verify">Confirmation mot de passe</label>
-        <input required id="password_verify" class="text password" type="password" name="password_verify">
+        <input type="text" value="<?= $infosClient["email"]; ?>" name="mail">
         <label class="text" for="phone">Téléphone</label>
-        <input required type="text" name="phone">
+        <input type="text" value="<?= $infosClient["tel"]; ?>" name="phone">
         <button type="submit" value="modifierInfos" name="valider" class="primary-btn">Valider</button>
     </section>
 </form>

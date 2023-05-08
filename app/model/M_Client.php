@@ -38,7 +38,6 @@ class M_Client
         String $nom,
         String $prenom,
         String $mail,
-        String $password_client,
         String $phone,
         int $adresse_id,
         int $id_client
@@ -49,7 +48,6 @@ class M_Client
                 SET nom_client = :nom,
                     prenom_client = :prenom,
                     email = :mail,
-                    mdp = :password_client,
                     tel = :phone,
                     date_modif = :date_modif,
                     adresse_id = :adresse_id
@@ -58,12 +56,12 @@ class M_Client
         M_AccesDonnees::bindParam($res, ':nom', $nom, PDO::PARAM_STR);
         M_AccesDonnees::bindParam($res, ':prenom', $prenom, PDO::PARAM_STR);
         M_AccesDonnees::bindParam($res, ':mail', $mail, PDO::PARAM_STR);
-        M_AccesDonnees::bindParam($res, ':password_client', $password_client, PDO::PARAM_STR);
         M_AccesDonnees::bindParam($res, ':phone', $phone, PDO::PARAM_STR);
         M_AccesDonnees::bindParam($res, ':date_modif', $now, PDO::PARAM_STR);
         M_AccesDonnees::bindParam($res, ':adresse_id', $adresse_id, PDO::PARAM_INT);
         M_AccesDonnees::execute($res);
     }
+
 
     /**
      * Effectue une requete de lecture en fonction de l'adresse mail d'un client afin de récupérer son id pseudo et mdp

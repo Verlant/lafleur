@@ -114,3 +114,49 @@ function infosValide($nom, $prenom, $rue, $ville, $cp, $mail, $password, $passwo
     }
     return $erreurs;
 }
+
+/**
+ * Retourne vrai si pas d'erreur
+ * Retourne un tableau contenant des messages pour chaque erreur rencontrées
+ * @param $nom : chaîne
+ * @param $prenom : chaîne
+ * @param $rue : chaîne
+ * @param $ville : chaîne
+ * @param $cp : chaîne
+ * @param $mail : chaîne
+ * @param $password : chaîne
+ * @param $password_verify : chaîne
+ * @param $phone : chaîne
+ * @return String : string
+ */
+function infosModifValide($nom, $prenom, $rue, $ville, $cp, $mail, $password, $password_verify, $phone): String
+{
+    $erreurs = "";
+    if (strlen($nom) > 190) {
+        $erreurs = $erreurs . "Le champ Nom ne peut contenir que 190 caractères.<br/>";
+    }
+    if (strlen($prenom) > 50) {
+        $erreurs = $erreurs . "Le champ Prénom ne peut contenir que 50 caractères.<br/>";
+    }
+    if (strlen($rue) > 190) {
+        $erreurs = $erreurs . "Le champ Rue ne peut contenir que 190 caractères.<br/>";
+    }
+    if (strlen($ville) > 190) {
+        $erreurs = $erreurs . "Le champ Ville ne peut contenir que 190 caractères.<br/>";
+    }
+    if (!empty($cp) and !estUnCp($cp)) {
+        $erreurs = $erreurs . "Erreur de code postal. Format attendu : \"34000\".<br/>";
+    }
+    if (!empty($mail) and !estUnMail($mail)) {
+        $erreurs = $erreurs . "Erreur de mail. Format attendu : \"exemple@domaine.com\".<br/>";
+    } else if (strlen($mail) > 190) {
+        $erreurs = $erreurs . "Le champ Email ne peut contenir que 190 caractères.<br/>";
+    }
+    if ($password != $password_verify) {
+        $erreurs = $erreurs . "Les mots de passe ne correspondent pas.<br/>";
+    }
+    if (!empty($phone) and !estUnTel($phone)) {
+        $erreurs = $erreurs . "Erreur de téléphone. Format attendu : \"0615273849\".<br/>";
+    }
+    return $erreurs;
+}

@@ -41,7 +41,7 @@
             $prixTotal = 0 ?>
             <article class="article-panier">
                 <div>
-                    <p class="text">Date de commande : <?= DateTime::createFromFormat('Y-m-d H:i:s', $commande["date_commande"])->format("d/m/Y H:i:s"); ?></p>
+                    <p class="text">Date d'achat : <?= DateTime::createFromFormat('Y-m-d H:i:s', $commande["date_commande"])->format("d/m/Y à H:i"); ?></p>
                     <p class="text">Date de livraison : <?= DateTime::createFromFormat('Y-m-d', $commande["date_livraison"])->format("d/m/Y"); ?></p>
                 </div>
                 <div>
@@ -50,10 +50,9 @@
                         <?php
                         foreach ($produitsParCommandes[$commande["id"]] as $produit) :
                             $prixTotal += $produit["prix_vente"] * $produit["quantite_vente"];
-                            $prixProduits = $produit["prix_vente"] * $produit["quantite_vente"]
                         ?>
                             <li class="produit-li">
-                                <?= $produit["quantite_vente"]; ?> <a class="link-produit" href="index.php?uc=produit&produit=<?= $produit["produit_id"]; ?>"><?= ucfirst($produit["nom_produit"]); ?></a> à <?= $produit["prix_vente"]; ?> € - Total : <?= $prixProduits; ?> €
+                                <?= $produit["quantite_vente"]; ?> <a class="link-produit" href="index.php?uc=produit&produit=<?= $produit["produit_id"]; ?>"><?= ucfirst($produit["nom_produit"]); ?></a> - <?= $produit["prix_vente"]; ?> €
                             </li>
                         <?php endforeach ?>
                     </ul>
