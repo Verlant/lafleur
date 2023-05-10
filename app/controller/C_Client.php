@@ -11,20 +11,25 @@ class C_Client
      * @param String $nom
      * @param String $prenom
      * @param String $rue
-     * @param String $nomPrenom
+     * @param String $ville
+     * @param String $cp
+     * @param String $mail
+     * @param String $password
+     * @param String $password_verify
+     * @param String $phone
      * @return bool
      */
     public function inscription(
-        String $nom,
-        String $prenom,
-        String $rue,
-        String $ville,
-        String $cp,
-        String $mail,
-        String $password,
-        String $password_verify,
-        String $phone
-    ): bool {
+        $nom,
+        $prenom,
+        $rue,
+        $ville,
+        $cp,
+        $mail,
+        $password,
+        $password_verify,
+        $phone
+    ) {
         if ($password != $password_verify || M_Client::getInfoClientParMail($mail) != false) {
             return false;
         } else {

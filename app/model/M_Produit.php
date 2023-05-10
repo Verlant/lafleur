@@ -90,8 +90,8 @@ class M_Produit
 
 
     /**
-     * Retourne sous forme d'un tableau associatif tous les produits de la
-     * catégorie passée en argument
+     * Retourne sous forme d'un tableau associatif tous les produits
+     * de la catégorie passée en argument
      *
      * @param $idCategorie
      * @return Array un tableau associatif
@@ -113,8 +113,8 @@ class M_Produit
     }
 
     /**
-     * Retourne sous forme d'un tableau associatif tous les produits de la
-     * catégorie passée en argument
+     * Retourne sous forme d'un tableau associatif tous les produits
+     * de la catégorie passée en argument
      *
      * @param int $idCouleur
      * @return Array un tableau associatif

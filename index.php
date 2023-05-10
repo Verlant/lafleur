@@ -1,15 +1,5 @@
 <?php
 session_start();
-// $_SESSION["produits"] = [];
-// $_SESSION["id"] = [];
-// var_dump($_SESSION);
-// unset($_SESSION["id"]);
-// var_dump($_POST);
-// echo '<br/>';
-
-// $date = new DateTime();
-// var_dump(date("Y-m-d"));
-// var_dump($date->add(DateInterval::createFromDateString('3 days'))->format("Y-m-d H:i:s"));
 
 // Pour afficher les erreurs PHP
 error_reporting(E_ALL);
@@ -44,27 +34,18 @@ if (isset($formulaireRecu)) {
             $prenom = trim(strtolower(filter_input(INPUT_POST, 'prenom')));
             $rue = trim(filter_input(INPUT_POST, 'rue'));
             $ville = trim(strtolower(filter_input(INPUT_POST, 'ville')));
-            $cp = trim(filter_input(INPUT_POST, 'cp'));
+            $cp = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'cp'));
             $mail = trim(filter_input(INPUT_POST, 'mail'));
             $password = filter_input(INPUT_POST, 'password');
             $password_verify = filter_input(INPUT_POST, 'password_verify');
             $phone = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'phone'));
             break;
-            // case "Valider l'adresse":
-            //     $nom = filter_input(INPUT_POST, 'nom');
-            //     $adresse = filter_input(INPUT_POST, 'adresse');
-            //     $ville = filter_input(INPUT_POST, 'ville');
-            //     $cp = filter_input(INPUT_POST, 'cp');
-            //     break;
-            // case "Valider l'adresse de livraison":
-            //     $adresse_id = filter_input(INPUT_POST, 'adresse_id');
-            //     break;
         case "modifierInfos":
             $nom =  trim(strtolower(filter_input(INPUT_POST, 'nom')));
             $prenom = trim(strtolower(filter_input(INPUT_POST, 'prenom')));
             $rue = trim(filter_input(INPUT_POST, 'rue'));
             $ville = trim(strtolower(filter_input(INPUT_POST, 'ville')));
-            $cp = trim(filter_input(INPUT_POST, 'cp'));
+            $cp = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'cp'));
             $mail = trim(filter_input(INPUT_POST, 'mail'));
             $password = filter_input(INPUT_POST, 'password');
             $password_verify = filter_input(INPUT_POST, 'password_verify');

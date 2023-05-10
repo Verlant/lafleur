@@ -2,7 +2,7 @@
     <section class="basic-section section-panier">
         <?php
         if (!$infosClient["est_livrable"]) : ?>
-            <p class="message">Votre ville n'est pas encore desservie.</p>
+            <p class="message error">Votre ville n'est pas encore desservie.</p>
         <?php endif; ?>
         <?php
         $date = new DateTime();

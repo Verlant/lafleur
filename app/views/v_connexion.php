@@ -1,4 +1,4 @@
-<form class="form-section" action="index.php?uc=connexion&action=connexion" method="POST" onsubmit="return valideConnexionForm();">
+<form class="form-section" action="index.php?uc=connexion&action=connexion" method="POST">
     <h1>Connexion</h1>
     <label class="text" for="mail_connexion">Email</label>
     <input required type="email" name="mail_connexion">
@@ -7,7 +7,7 @@
     <button type="submit" value="Connexion" name="valider" class="primary-btn">Connexion</button>
 </form>
 
-<form class="form-section" action="index.php?uc=connexion&action=inscription" method="POST" onsubmit="return valideInscriptionForm();">
+<form class="form-section" action="index.php?uc=connexion&action=inscription" method="POST">
     <h1>Inscription</h1>
     <label class="text" for="nom">Nom</label>
     <input required type="text" name="nom">

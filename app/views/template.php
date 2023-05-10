@@ -12,7 +12,8 @@
         https://fonts.cdnfonts.com/css/agile-jewelry-personal-use
         https://fonts.cdnfonts.com/css/heldane-text
         https://code.jquery.com/jquery-3.6.4.slim.min.js
-        https://cdnjs.cloudflare.com/ajax/libs/jquery.spritely/0.6.8/jquery.spritely.min.js">
+        https://cdnjs.cloudflare.com/ajax/libs/jquery.spritely/0.6.8/jquery.spritely.min.js
+        https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6468.51747073409!2d5.360954216219698!3d43.76461762480631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12ca18e8c43ef017%3A0x37311f4ada7a48af!2sRue%20du%20Grand%20Pr%C3%A9%2C%2084160%20Lourmarin!5e0!3m2!1sfr!2sfr!4v1683025305334!5m2!1sfr!2sfr">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LaFleur</title>
     <link rel="icon" href="public/img/logo-la-fleur.svg" />

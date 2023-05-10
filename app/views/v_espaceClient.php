@@ -1,7 +1,7 @@
 <section>
     <?php
     if (!$infosClient["est_livrable"]) : ?>
-        <p class="message">Votre ville n'est pas encore desservie.</p>
+        <p class="message error">Votre ville n'est pas encore desservie.</p>
     <?php endif; ?>
     <div class="basic-section">
         <div class="client-section">
@@ -35,7 +35,7 @@
 <section class="basic-section section-commandes">
     <h1>Vos achats</h1>
     <?php if (empty($commandes)) : ?>
-        <p class="message">Aucune commande n'a été effectuée.</p>
+        <p class="message validation">Aucune commande n'a été effectuée.</p>
     <?php else : ?>
         <?php foreach ($commandes as $commande) :
             $prixTotal = 0 ?>

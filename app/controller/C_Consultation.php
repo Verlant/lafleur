@@ -12,7 +12,7 @@ class C_Consultation
     }
 
     /**
-     *  Renvoie de la catégorie demandé
+     *  Renvoie les produits de la catégorie demandé
      * @return Array
      */
     public function trouveLesProduitsDeCategorie(int $categorie)
@@ -21,7 +21,7 @@ class C_Consultation
     }
 
     /**
-     *  Renvoie de la couleur demandé
+     *  Renvoie les produits de la couleur demandé
      * @return Array
      */
     public function trouveLesProduitsDeCouleur(int $couleur)
@@ -30,7 +30,7 @@ class C_Consultation
     }
 
     /**
-     *  Ajoute le produit demandé au panier en gardant l'affichage des produits de la page actuelle
+     *  Ajoute le produit demandé au panier
      * @return Array
      */
     public function ajouterAuPanier(C_Session $session, int $idProduit)
@@ -41,6 +41,22 @@ class C_Consultation
         } else {
             return "Ce produit a été ajouté au panier.";
         }
+    }
+
+    /**
+     * Vérifie la disponibilité d'un produit
+     * @param int
+     * @return bool
+     */
+    public function produitEstDisponible(int $idProduit): bool
+    {
+        $produit = M_Produit::trouveLeProduit($idProduit);
+        foreach ($produit as $ligneProduit) {
+            if ($ligneProduit["quantite_stock"] < $ligneProduit["quantite_fleur"]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -78,22 +94,6 @@ class C_Consultation
     public function toutesLesCouleurs()
     {
         return M_Couleur::trouveLesCouleurs();
-    }
-
-    /**
-     * Vérifie la disponibilité d'un produit
-     * @param int
-     * @return bool
-     */
-    public function produitEstDisponible(int $idProduit): bool
-    {
-        $produit = M_Produit::trouveLeProduit($idProduit);
-        foreach ($produit as $ligneProduit) {
-            if ($ligneProduit["quantite_stock"] < $ligneProduit["quantite_fleur"]) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
