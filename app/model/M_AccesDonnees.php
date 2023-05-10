@@ -4,16 +4,16 @@
  * Classe d'accès aux données.
 
  * Utilise les services de la classe PDO
- * pour l'application Lord Of Geek (LOG)
+ * pour l'application LaFleur
  * Les attributs sont tous statiques,
  * les 4 premiers pour la connexion
  * $monPdo de type PDO
  * $monPdoGsb qui contiendra l'unique instance de la classe
  *
  * @package default
- * @author Loïc LOG
- * @version    1.0
- * @link       http://www.php.net/manual/fr/book.pdo.php
+ * @author  Antoine VERLYCK
+ * @version 1.0
+ * @link    http://www.php.net/manual/fr/book.pdo.php
  */
 class M_AccesDonnees
 {
