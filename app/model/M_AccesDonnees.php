@@ -19,7 +19,7 @@ class M_AccesDonnees
 {
 
     private static String $serveur = 'mysql:host=localhost';
-    private static String $bdd = 'dbname=lafleur';
+    private static String $bdd = 'dbname=c86verlyck';
     private static String $user = 'root';
     private static String $mdp = '';
 
