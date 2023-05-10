@@ -11,9 +11,9 @@
  * $monPdoGsb qui contiendra l'unique instance de la classe
  *
  * @package default
- * @author  Antoine VERLYCK
- * @version 1.0
- * @link    http://www.php.net/manual/fr/book.pdo.php
+ * @author Antoine VERLYCK
+ * @version    1.0
+ * @link       http://www.php.net/manual/fr/book.pdo.php
  */
 class M_AccesDonnees
 {
@@ -37,7 +37,11 @@ class M_AccesDonnees
     public static function getPdo()
     {
         if (M_AccesDonnees::$monPdo == null) {
-            M_AccesDonnees::$monPdo = new PDO(M_AccesDonnees::$serveur . ';' . M_AccesDonnees::$bdd, M_AccesDonnees::$user, M_AccesDonnees::$mdp);
+            M_AccesDonnees::$monPdo = new PDO(
+                M_AccesDonnees::$serveur . ';' . M_AccesDonnees::$bdd,
+                M_AccesDonnees::$user,
+                M_AccesDonnees::$mdp
+            );
             M_AccesDonnees::$monPdo->query("SET CHARACTER SET utf8");
         }
         return M_AccesDonnees::$monPdo;
@@ -60,8 +64,12 @@ class M_AccesDonnees
      * @param int $pdo_param
      * @return void
      */
-    public static function bindParam(PDOStatement $statement, String $marque, $valeur, int $pdo_param)
-    {
+    public static function bindParam(
+        PDOStatement $statement,
+        String $marque,
+        $valeur,
+        int $pdo_param
+    ) {
         $statement->bindParam($marque, $valeur, $pdo_param);
     }
 

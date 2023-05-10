@@ -34,7 +34,7 @@ class C_Commande
         $prix_total_commande = 0;
         $i = 0;
         foreach ($lesProduits as $produit) {
-            $prix_total_commande += $produit["prix_vente"] * $quantites_ventes[$i];
+            $prix_total_commande += $produit[0]["prix_vente"] * $quantites_ventes[$i];
             $i++;
         }
         if ($prix_total_commande < 50) {
@@ -43,6 +43,6 @@ class C_Commande
         }
         M_Commande::creerCommande($client_id, $lesIdProduit, $quantites_ventes, $frais_livraison);
         $session->supprimerPanier();
-        return afficheMessage("Commande enregistrée");
+        return afficheMessage("Commande enregistrée.");
     }
 }

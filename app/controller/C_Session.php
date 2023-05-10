@@ -6,18 +6,19 @@ class C_Session
      * Fonction qui vérifie si le mdp est bon lors de la connexion en fonction du mail
      * Retourne l'id de l'utilisateur en cas de réussite
      * Retourne false en cas d'échec
-     * @return int|bool
+     * @return int|false
      */
-    public function verifMotDePasse(String $mail, String $mdp): int
+    public function verifMotDePasse(String $mail, String $mdp): int | false
     {
         $data = M_Client::getInfoClientParMail($mail);
-        $mdp_bdd = $data['mdp'];
-        if (password_verify($mdp, $mdp_bdd) and estEntier($data['id'])) {
+        if (!is_array($data)) {
+            return false;
+        } else if (password_verify($mdp, $data['mdp']) and estEntier($data['id'])) {
             $_SESSION['id'] = $data['id'];
+            return $data['id'];
         } else {
-            $data['id'] = false;
+            return false;
         }
-        return $data['id'];
     }
 
     /**

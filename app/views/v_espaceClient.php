@@ -1,7 +1,7 @@
 <section>
     <?php
     if (!$infosClient["est_livrable"]) : ?>
-        <p class="message">Votre ville n'est pas encore desservie.</p>
+        <p class="message error">Votre ville n'est pas encore desservie.</p>
     <?php endif; ?>
     <div class="basic-section">
         <div class="client-section">
@@ -35,13 +35,13 @@
 <section class="basic-section section-commandes">
     <h1>Vos achats</h1>
     <?php if (empty($commandes)) : ?>
-        <p class="message">Aucune commande n'a été effectuée.</p>
+        <p class="message validation">Aucune commande n'a été effectuée.</p>
     <?php else : ?>
         <?php foreach ($commandes as $commande) :
             $prixTotal = 0 ?>
             <article class="article-panier">
                 <div>
-                    <p class="text">Date de commande : <?= DateTime::createFromFormat('Y-m-d H:i:s', $commande["date_commande"])->format("d/m/Y H:i:s"); ?></p>
+                    <p class="text">Date d'achat : <?= DateTime::createFromFormat('Y-m-d H:i:s', $commande["date_commande"])->format("d/m/Y à H:i"); ?></p>
                     <p class="text">Date de livraison : <?= DateTime::createFromFormat('Y-m-d', $commande["date_livraison"])->format("d/m/Y"); ?></p>
                 </div>
                 <div>
@@ -50,10 +50,9 @@
                         <?php
                         foreach ($produitsParCommandes[$commande["id"]] as $produit) :
                             $prixTotal += $produit["prix_vente"] * $produit["quantite_vente"];
-                            $prixProduits = $produit["prix_vente"] * $produit["quantite_vente"]
                         ?>
                             <li class="produit-li">
-                                <?= $produit["quantite_vente"]; ?> <?= ucfirst($produit["nom_produit"]); ?> à <?= $produit["prix_vente"]; ?> € - Total : <?= $prixProduits; ?> €
+                                <?= $produit["quantite_vente"]; ?> <a class="link-produit" href="index.php?uc=produit&produit=<?= $produit["produit_id"]; ?>"><?= ucfirst($produit["nom_produit"]); ?></a> - <?= $produit["prix_vente"]; ?> €
                             </li>
                         <?php endforeach ?>
                     </ul>
@@ -62,10 +61,10 @@
                     <p class="text bold">Commande n°<?= $commande['id']; ?></p>
                     <?php if ($commande['frais_livraison']) : $prixTotal += 2.99 ?>
                         <p class="text bold">Total : <?= $prixTotal; ?> €</p>
-                        <p class="text">Frais de livraison : 2.99 €</p>
+                        <p class="text bold">Livraison : 2.99 €</p>
                     <?php else : ?>
                         <p class="text bold">Total : <?= $prixTotal; ?> €</p>
-                        <p class="text">Pas de frais de livraison</p>
+                        <p class="text bold">Livraison offerte</p>
                     <?php endif ?>
                 </div>
             </article>

@@ -1,15 +1,5 @@
 <?php
 session_start();
-// $_SESSION["produits"] = [];
-// $_SESSION["id"] = [];
-// var_dump($_SESSION);
-// unset($_SESSION["id"]);
-// var_dump($_POST);
-// echo '<br/>';
-
-// $date = new DateTime();
-// var_dump(date("Y-m-d"));
-// var_dump($date->add(DateInterval::createFromDateString('3 days'))->format("Y-m-d H:i:s"));
 
 // Pour afficher les erreurs PHP
 error_reporting(E_ALL);
@@ -44,37 +34,32 @@ if (isset($formulaireRecu)) {
             $prenom = trim(strtolower(filter_input(INPUT_POST, 'prenom')));
             $rue = trim(filter_input(INPUT_POST, 'rue'));
             $ville = trim(strtolower(filter_input(INPUT_POST, 'ville')));
-            $cp = trim(filter_input(INPUT_POST, 'cp'));
+            $cp = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'cp'));
             $mail = trim(filter_input(INPUT_POST, 'mail'));
             $password = filter_input(INPUT_POST, 'password');
             $password_verify = filter_input(INPUT_POST, 'password_verify');
-            $phone = trim(filter_input(INPUT_POST, 'phone'));
+            $phone = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'phone'));
             break;
-            // case "Valider l'adresse":
-            //     $nom = filter_input(INPUT_POST, 'nom');
-            //     $adresse = filter_input(INPUT_POST, 'adresse');
-            //     $ville = filter_input(INPUT_POST, 'ville');
-            //     $cp = filter_input(INPUT_POST, 'cp');
-            //     break;
-            // case "Valider l'adresse de livraison":
-            //     $adresse_id = filter_input(INPUT_POST, 'adresse_id');
-            //     break;
         case "modifierInfos":
-            $nom = trim(strtolower(filter_input(INPUT_POST, 'nom')));
+            $nom =  trim(strtolower(filter_input(INPUT_POST, 'nom')));
             $prenom = trim(strtolower(filter_input(INPUT_POST, 'prenom')));
             $rue = trim(filter_input(INPUT_POST, 'rue'));
             $ville = trim(strtolower(filter_input(INPUT_POST, 'ville')));
-            $cp = trim(filter_input(INPUT_POST, 'cp'));
+            $cp = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'cp'));
             $mail = trim(filter_input(INPUT_POST, 'mail'));
-            $phone = trim(filter_input(INPUT_POST, 'phone'));
+            $password = filter_input(INPUT_POST, 'password');
+            $password_verify = filter_input(INPUT_POST, 'password_verify');
+            $phone = preg_replace('/\s+/', '', filter_input(INPUT_POST, 'phone'));
             break;
         case "confirmerCommande":
             $date_livraison = filter_input(INPUT_POST, "date-livraison");
             $quantites_ventes = [];
             foreach ($_POST as $input_name => $quantite_vente) {
-                $quantites_ventes[] =  trim(filter_input(INPUT_POST, $input_name));
+                $quantite_input = trim(filter_input(INPUT_POST, $input_name));
+                if ($quantite_input > 0 and estEntier($quantite_input)) {
+                    $quantites_ventes[] =  $quantite_input;
+                }
             }
-            array_pop($quantites_ventes);
             break;
         default:
             break;
@@ -100,7 +85,7 @@ if (!isset($produitPanier) or empty($produitPanier)) {
 // Controleur principal
 switch ($uc) {
     case 'accueil':
-        $controleur = new C_Consultation();
+        $controleur = new C_Consultation;
         $lesProduits = $controleur->derniersProduitsSortis();
         break;
     case 'boutique':
@@ -116,12 +101,17 @@ switch ($uc) {
         $lesCouleurs = $controleur->toutesLesCouleurs();
         break;
     case 'produit':
-        $controleur = new C_Consultation();
+        $controleur = new C_Consultation;
         $produit = $controleur->trouveLeProduit($idProduit);
+        $produitDispo = $controleur->produitEstDisponible($idProduit);
+        if (!$produitDispo) {
+            $message = afficheErreur("Désolé, ce produit est en rupture de stock.");
+        }
         break;
     case 'panier':
-        $controleur_panier = new C_GestionPanier();
+        $controleur_panier = new C_GestionPanier;
         $controleur_client = new C_Client;
+        $controleur_consultation = new C_Consultation;
         if ($action == 'supprimerUnProduit') {
             $controleur_panier->supprimerUnProduit($session, $idProduit);
         }
@@ -142,12 +132,18 @@ switch ($uc) {
         $controleur_client = new C_Client;
         $infosClient = $controleur_client->infosClient($session);
         $controleur_commande = new C_Commande;
-        if ($action == 'confirmerCommande' and $infosClient["est_livrable"]) {
+        if ($action == 'confirmerCommande' and $infosClient["est_livrable"] and !empty($quantites_ventes)) {
             $message = $controleur_commande->confirmerCommande($session, $quantites_ventes);
             header('Location: index.php?uc=espaceClient');
         } else if (!$infosClient["est_livrable"]) {
-            $message = afficheMessage("Commande non valide, votre ville n'est pas encore desservie.");
+            $message = afficheErreur("Commande non valide, votre ville n'est pas encore desservie.");
+        } else {
+            $message = afficheErreur("Commande non valide, la quantité entrée doit être un nombre entier positif.");
         }
+        $infosClient = $controleur_client->infosClient($session);
+        $commandes = $controleur_client->listeLesCommandes($session);
+        $produitsParCommandes = $controleur_client->listeLesProduitsParCommandes($commandes);
+        $uc = "espaceClient";
         break;
     case 'espaceClient':
         $controleur = new C_Client;
@@ -156,24 +152,34 @@ switch ($uc) {
             header('Location: index.php?uc=accueil');
             exit();
         } else if ($action == 'modifierInfos') {
-            // $erreursSaisieAdresse = $controleur->adresseEstValide($nom, $rue, $ville, $cp);
-            // if (empty($erreursSaisieAdresse) and $cp != "00000") {
-            //     $controleur->creerAdresse($rue,  $nom,  $ville,  $cp, $session);
-            // } else if ($cp == "00000") {
-            //     $message = afficheMessage("Le code postal 00000 n'existe pas.");
-            // } else {
-            //     $message = afficheMessage($erreursSaisieAdresse);
-            // }
+            $erreursSaisie = infosModifValide($nom, $prenom, $rue, $ville, $cp, $mail, $password, $password_verify, $phone);
+            if (empty($erreursSaisie) and $session->getIdClient() != false) {
+                $id_client = $session->getIdClient();
+                $controleur->modifInfos(
+                    $nom,
+                    $prenom,
+                    $rue,
+                    $ville,
+                    $cp,
+                    $mail,
+                    $phone,
+                    $id_client
+                );
+                $message = afficheMessage("Vos informations ont bien été enregistrées");
+            } else {
+                $message = afficheErreur($erreursSaisie);
+                $uc = "modifierInfos";
+            }
         }
         $infosClient = $controleur->infosClient($session);
         $commandes = $controleur->listeLesCommandes($session);
         $produitsParCommandes = $controleur->listeLesProduitsParCommandes($commandes);
         break;
     case 'connexion':
-        $controleur = new C_Client();
-        if (isset($mail) and isset($password)) {
-            // $erreursSaisieAdresse = $controleur->adresseEstValide($nom, $rue, $ville, $cp);
-            if ($action == 'inscription') {
+        $controleur = new C_Client;
+        if ($action == 'inscription') {
+            $erreursSaisie = infosValide($nom, $prenom, $rue, $ville, $cp, $mail, $password, $password_verify, $phone);
+            if (empty($erreursSaisie)) {
                 if ($controleur->inscription(
                     $nom,
                     $prenom,
@@ -186,27 +192,31 @@ switch ($uc) {
                     $phone
                 )) {
                     $message = afficheMessage('Votre compte a bien été créé.');
-                } else if ($cp == "00000") {
-                    $message = afficheMessage("Le code postal 00000 n'existe pas.");
                 } else {
-                    $message = afficheMessage($erreursSaisieAdresse);
+                    $message = afficheErreur("Cette adresse mail est déjà utilisé");
                 }
-            } else if ($action == 'connexion' and estUnMail($mail) and $session->verifMotDePasse($mail, $password)) {
+            } else {
+                $message = afficheErreur($erreursSaisie);
+            }
+        } else if ($action == 'connexion') {
+            if (!estUnMail($mail)) {
+                $message = afficheErreur("Mail non valide. Format demandé : exemple@domaine.com");
+            } else if (!$session->verifMotDePasse($mail, $password)) {
+                $message = afficheErreur('Mot de passe ou mail inconnu. Réessayez');
+            } else {
                 header('Location: index.php?uc=espaceClient');
                 exit();
-            } else if (!estUnMail($mail)) {
-                $message = afficheMessage("Mail non valide. Format demandé : exemple@domaine.com");
-            } else if (!$session->verifMotDePasse($mail, $password)) {
-                $message = afficheMessage('Mot de passe ou mail inconnu. Réessayez');
             }
         }
         break;
     case 'aPropos':
         break;
     case 'modifierInfos':
+        $controleur = new C_Client;
+        $infosClient = $controleur->infosClient($session);
         break;
     default:
-        header('Location: index.php?uc=accueil');
+        header('Location: index.php');
         exit();
         break;
 }
