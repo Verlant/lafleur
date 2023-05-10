@@ -31,14 +31,12 @@ class C_Client
         $phone
     ) {
         if (
-            $password != $password_verify ||
-            M_Client::getInfoClientParMail($mail) != false
+            $password != $password_verify || M_Client::getInfoClientParMail($mail) != false
         ) {
             return false;
         } else {
             // Démarre une transaction
             M_AccesDonnees::beginTransaction();
-
             // Vérifie si la ville existe deja dans la bdd
             // Si oui ne l'ajoute pas et récupère son id
             // Si non l'ajoute dans la bdd
@@ -75,7 +73,6 @@ class C_Client
                 $phone,
                 $adresse_id
             );
-
             // Commit la transaction
             M_AccesDonnees::commit();
             return true;
@@ -153,7 +150,7 @@ class C_Client
      * @param C_Session $session
      * @return Array|false
      */
-    public function infosClient(C_Session $session): array | false
+    public function infosClient(C_Session $session)
     {
         return M_Client::getInfosClientParId($session::getIdClient());
     }
@@ -164,7 +161,7 @@ class C_Client
      * @param C_Session $session
      * @return Array|false
      */
-    public function listeLesCommandes(C_Session $session): array | false
+    public function listeLesCommandes(C_Session $session)
     {
         return M_Commande::listeDesCommandes($session->getIdClient());
     }
@@ -176,7 +173,7 @@ class C_Client
      * @param Array|false $commandes
      * @return Array|false
      */
-    public function listeLesProduitsParCommandes(array | false $commandes): array | false
+    public function listeLesProduitsParCommandes($commandes)
     {
         if ($commandes == false) {
             return false;

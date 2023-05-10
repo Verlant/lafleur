@@ -70,7 +70,7 @@ class M_Client
      * @param String $mail
      * @return Array|false
      */
-    public static function getInfoClientParMail(String $mail): array | false
+    public static function getInfoClientParMail(String $mail)
     {
         $req = "SELECT id, mdp FROM clients WHERE email = :mail";
         $res = M_AccesDonnees::prepare($req);
@@ -85,7 +85,7 @@ class M_Client
      * @param int $id
      * @return Array|false
      */
-    public static function getInfosClientParId(int $id): array | false
+    public static function getInfosClientParId(int $id)
     {
         $req = "SELECT
                     nom_client, prenom_client, email, tel, rue, nom_ville, cp, est_livrable

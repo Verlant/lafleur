@@ -8,7 +8,7 @@ class C_Session
      * Retourne false en cas d'échec
      * @return int|false
      */
-    public function verifMotDePasse(String $mail, String $mdp): int | false
+    public function verifMotDePasse(String $mail, String $mdp)
     {
         $data = M_Client::getInfoClientParMail($mail);
         if (!is_array($data)) {
@@ -26,7 +26,7 @@ class C_Session
      * Retourne false en cas d'échec
      * @return int|bool
      */
-    public static function getIdClient(): int | false
+    public static function getIdClient()
     {
         if (isset($_SESSION['id']) and !empty($_SESSION['id'])) {
             return $_SESSION['id'];

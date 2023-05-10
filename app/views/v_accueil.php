@@ -28,15 +28,15 @@
         ?>
             <article class="card card-accueil">
                 <a href="index.php?uc=produit&produit=<?= $idProduit ?>"><img class="img-produit" src="public/img/produit-<?= $idProduit; ?>.jpg" alt="image de bouquet"></a>
-                <span class="info-produit-card">
-                    <p class="nom-produit-card"><?= $nomProduit; ?> </p>
+                <div class="info-produit-card">
+                    <h2 class="nom-produit-card"><?= $nomProduit; ?> </h2>
                     <p class="text-center"><?= $prixVente; ?> €</p>
                     <?php if ($produitDispo) : ?>
                         <img data-id="<?= $idProduit ?>" class="logo-panier add-panier" src="public/img/panier.svg" alt="logo de panier">
                     <?php else : ?>
                         <img data-id="<?= $idProduit ?>" class="logo-panier add-panier produit-indisponible" src="public/img/panier.svg" alt="logo de panier">
                     <?php endif; ?>
-                </span>
+                </div>
             </article>
         <?php endforeach ?>
     </div>
@@ -71,7 +71,7 @@
             <p class="text">
                 Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
             </p>
-            <a class="primary-btn" href="https://verlyck.needemand.com/projets_web/blog_lafleur">Visiter notre blog !</a>
+            <a class="primary-btn" href="https://verlyck.needemand.com/projets_web/blog_lafleur" target="_blank">Visiter notre blog !</a>
         </div>
     </div>
 </section>

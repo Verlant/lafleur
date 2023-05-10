@@ -40,7 +40,7 @@
     </div>
 </aside>
 
-<section class="section-boutique">
+<div class="section-boutique">
     <?php
     foreach ($lesProduits as $unProduit) :
         $idProduit = $unProduit['produit_id'];
@@ -52,15 +52,15 @@
             <a href="index.php?uc=produit&produit=<?= $idProduit ?>">
                 <img class="img-produit" src="public/img/produit-<?= $idProduit; ?>.jpg" alt="photo de fleurs">
             </a>
-            <span class="info-produit-card">
-                <p class="nom-produit-card"><?= $nomProduit; ?> </p>
+            <div class="info-produit-card">
+                <h3 class="nom-produit-card"><?= $nomProduit; ?> </h3>
                 <p class="text-center"><?= $prixVente; ?> €</p>
                 <?php if ($produitDispo) : ?>
                     <img data-id="<?= $idProduit ?>" class="logo-panier add-panier" src="public/img/panier.svg" alt="logo de panier">
                 <?php else : ?>
                     <img data-id="<?= $idProduit ?>" class="logo-panier add-panier produit-indisponible" src="public/img/panier.svg" alt="logo de panier">
                 <?php endif; ?>
-            </span>
+            </div>
         </article>
     <?php endforeach ?>
-</section>
+</div>

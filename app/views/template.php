@@ -42,7 +42,7 @@
                 <?php if ($session->getIdClient()) : ?>
                     <li><a class="header-link" href="index.php?uc=espaceClient">Espace client</a></li>
                 <?php else : ?>
-                    <a class="header-link" href="index.php?uc=connexion">Connexion</a>
+                    <li><a class="header-link" href="index.php?uc=connexion">Connexion</a></li>
                 <?php endif; ?>
                 <li>
                     <a class="header-link" href="index.php?uc=panier">Panier</a>
@@ -94,7 +94,7 @@
     <footer id="footer-nav">
         <ul>
             <li class="footer-link-container">
-                <a class="footer-link" href="https://verlyck.needemand.com/projets_web/blog_lafleur">Blog</a>
+                <a class="footer-link" href="https://verlyck.needemand.com/projets_web/blog_lafleur" target="_blank">Blog</a>
                 <a class="footer-link" href="index.php?uc=boutique">Boutique</a>
             </li>
             <li>

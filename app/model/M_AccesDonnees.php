@@ -20,8 +20,8 @@ class M_AccesDonnees
 
     private static String $serveur = 'mysql:host=localhost';
     private static String $bdd = 'dbname=c86verlyck';
-    private static String $user = 'root';
-    private static String $mdp = '';
+    private static String $user = 'c86verlyck';
+    private static String $mdp = 'cnt_uHSU3';
 
     /**
      *
@@ -86,7 +86,7 @@ class M_AccesDonnees
      * Récupère l'id du dernier insert
      * @return int|false
      */
-    public static function lastInsertId(): int | false
+    public static function lastInsertId()
     {
         return M_AccesDonnees::getPdo()->lastInsertId();
     }

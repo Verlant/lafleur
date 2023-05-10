@@ -11,7 +11,7 @@ class M_Ville
      * @param bool $livrable
      * @return int|false
      */
-    public static function creerVille(String $ville, int $livrable): int | false
+    public static function creerVille(String $ville, int $livrable)
     {
         $req = "INSERT INTO villes (nom_ville, est_livrable) VALUES (:ville, :est_livrable)";
         $res = M_AccesDonnees::prepare($req);
@@ -30,7 +30,7 @@ class M_Ville
      * @param String nom ville
      * @return Array|false
      */
-    public static function trouveLaVille(String $ville): array | false
+    public static function trouveLaVille(String $ville)
     {
         $req = "SELECT id FROM villes WHERE nom_ville = :ville";
         $res = M_AccesDonnees::prepare($req);

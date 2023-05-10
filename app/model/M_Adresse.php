@@ -9,7 +9,7 @@ class M_Adresse
      * @param Int $cp_id
      * @return int|false
      */
-    public static function creerAdresse(String $rue, int $ville_id, int $cp_id): int | false
+    public static function creerAdresse(String $rue, int $ville_id, int $cp_id)
     {
         // Requete d'ecriture d'une adresse
         $req = "INSERT INTO adresses
@@ -33,7 +33,7 @@ class M_Adresse
      * @param int $client_id
      * @return Array|false
      */
-    public static function trouveAdresse(String $rue, int $ville_id, int $cp_id): array | false
+    public static function trouveAdresse(String $rue, int $ville_id, int $cp_id)
     {
         $req = "SELECT
                     adresses.id

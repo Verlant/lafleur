@@ -71,7 +71,7 @@ class M_Commande
      * @param int id client
      * @return Array|false
      */
-    public static function listeDesCommandes(int $client_id): array | false
+    public static function listeDesCommandes(int $client_id)
     {
         $req = "SELECT id, date_commande, date_livraison, frais_livraison
                 FROM commandes
@@ -93,7 +93,7 @@ class M_Commande
      * @param int id commande
      * @return Array|false
      */
-    public static function trouveLesProduitsParCommande(int $id_commande): array | false
+    public static function trouveLesProduitsParCommande(int $id_commande)
     {
         $req = "SELECT produits.id AS produit_id, prix_vente, quantite_vente, nom_produit
                 FROM commande_produit

@@ -9,7 +9,7 @@ class M_CodePostal
      * @param String code postal
      * @return int|false
      */
-    public static function creerCodePostal(String $cp): int | false
+    public static function creerCodePostal(String $cp)
     {
         $req = "INSERT INTO codes_postaux (cp) VALUES (:cp)";
         $res = M_AccesDonnees::prepare($req);
@@ -27,7 +27,7 @@ class M_CodePostal
      * @param String code postal
      * @return array|false
      */
-    public static function trouveLeCodePostal(String $cp): array | false
+    public static function trouveLeCodePostal(String $cp)
     {
         $req = "SELECT id FROM codes_postaux WHERE cp = :cp";
         $res = M_AccesDonnees::prepare($req);
