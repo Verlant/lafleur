@@ -1,11 +1,21 @@
+<!-- balise doctype html signifiant au navigateur
+    que ce document est de type HTML -->
 <!DOCTYPE html>
-<html lang="en">
+<!-- balise html marquant la racine du document
+    attribut lang définissant la langue de base du site -->
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'
+        https://fonts.cdnfonts.com/css/agile-jewelry-personal-use
+        https://fonts.cdnfonts.com/css/heldane-text
+        https://code.jquery.com/jquery-3.6.4.slim.min.js
+        https://cdnjs.cloudflare.com/ajax/libs/jquery.spritely/0.6.8/jquery.spritely.min.js">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Fleur</title>
+    <title>LaFleur</title>
+    <link rel="icon" href="public/img/logo-la-fleur.svg" />
     <link rel="stylesheet" href="public/css/main.css">
     <link href="https://fonts.cdnfonts.com/css/agile-jewelry-personal-use" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/heldane-text" rel="stylesheet">
