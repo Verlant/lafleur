@@ -8,10 +8,10 @@
  * teste si une chaîne a un format de code postal
  *
  * Teste le nombre de caractères de la chaîne et le type entier (composé de chiffres)
- * @param $codePostal : la chaîne testée
+ * @param String $codePostal : la chaîne testée
  * @return : vrai ou faux
  */
-function estUnCp($codePostal)
+function estUnCp(String $codePostal)
 {
     return strlen($codePostal) == 5 && estEntier($codePostal) && $codePostal != "00000";
 }
@@ -20,10 +20,10 @@ function estUnCp($codePostal)
  * teste si une chaîne est un entier
  *
  * Teste si la chaîne ne contient que des chiffres
- * @param $valeur : la chaîne testée
+ * @param String $valeur : la chaîne testée
  * @return : vrai ou faux
  */
-function estEntier($valeur)
+function estEntier(String $valeur)
 {
     return preg_match("/[^0-9]/", $valeur) == 0;
 }
@@ -32,10 +32,10 @@ function estEntier($valeur)
  * Teste si une chaîne a le format d'un mail
  *
  * Utilise les expressions régulières
- * @param $mail : la chaîne testée
+ * @param String $mail : la chaîne testée
  * @return : vrai ou faux
  */
-function estUnMail($mail)
+function estUnMail(String $mail)
 {
     return preg_match("#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#", $mail) == 1;
 }
@@ -44,10 +44,10 @@ function estUnMail($mail)
  * teste si une chaîne a un format de téléphone français
  *
  * Teste le nombre de caractères de la chaîne et le type entier (composé de chiffres)
- * @param $phone : la chaîne testée
+ * @param String $phone : la chaîne testée
  * @return : vrai ou faux
  */
-function estUnTel($phone)
+function estUnTel(String $phone)
 {
     return strlen($phone) == 10 && estEntier($phone) && $phone != "0000000000";
 }
@@ -55,18 +55,18 @@ function estUnTel($phone)
 /**
  * Retourne vrai si pas d'erreur
  * Retourne un tableau contenant des messages pour chaque erreur rencontrées
- * @param $nom : chaîne
- * @param $prenom : chaîne
- * @param $rue : chaîne
- * @param $ville : chaîne
- * @param $cp : chaîne
- * @param $mail : chaîne
- * @param $password : chaîne
- * @param $password_verify : chaîne
- * @param $phone : chaîne
+ * @param String $nom : chaîne
+ * @param String $prenom : chaîne
+ * @param String $rue : chaîne
+ * @param String $ville : chaîne
+ * @param String $cp : chaîne
+ * @param String $mail : chaîne
+ * @param String $password : chaîne
+ * @param String $password_verify : chaîne
+ * @param String $phone : chaîne
  * @return String : string
  */
-function infosValide($nom, $prenom, $rue, $ville, $cp, $mail, $password, $password_verify, $phone): String
+function infosValide(String $nom, String $prenom, String $rue, String $ville, String $cp, String $mail, String $password, String $password_verify, String $phone): String
 {
     $erreurs = "";
     if ($nom == "") {
@@ -118,19 +118,28 @@ function infosValide($nom, $prenom, $rue, $ville, $cp, $mail, $password, $passwo
 /**
  * Retourne vrai si pas d'erreur
  * Retourne un tableau contenant des messages pour chaque erreur rencontrées
- * @param $nom : chaîne
- * @param $prenom : chaîne
- * @param $rue : chaîne
- * @param $ville : chaîne
- * @param $cp : chaîne
- * @param $mail : chaîne
- * @param $password : chaîne
- * @param $password_verify : chaîne
- * @param $phone : chaîne
+ * @param String $nom : chaîne
+ * @param String $prenom : chaîne
+ * @param String $rue : chaîne
+ * @param String $ville : chaîne
+ * @param String $cp : chaîne
+ * @param String $mail : chaîne
+ * @param String $password : chaîne
+ * @param String $password_verify : chaîne
+ * @param String $phone : chaîne
  * @return String : string
  */
-function infosModifValide($nom, $prenom, $rue, $ville, $cp, $mail, $password, $password_verify, $phone): String
-{
+function infosModifValide(
+    String $nom,
+    String $prenom,
+    String $rue,
+    String $ville,
+    String $cp,
+    String $mail,
+    String $password,
+    String $password_verify,
+    String $phone
+): String {
     $erreurs = "";
     if (strlen($nom) > 190) {
         $erreurs = $erreurs . "Le champ Nom ne peut contenir que 190 caractères.<br/>";

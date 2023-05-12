@@ -15,7 +15,7 @@ class C_Session
             return false;
         } else if (password_verify($mdp, $data['mdp']) and estEntier($data['id'])) {
             $_SESSION['id'] = $data['id'];
-            return $data['id'];
+            return $_SESSION['id'];
         } else {
             return false;
         }

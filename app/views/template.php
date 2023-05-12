@@ -1,8 +1,5 @@
-<!-- balise doctype html signifiant au navigateur
-    que ce document est de type HTML -->
 <!DOCTYPE html>
-<!-- balise html marquant la racine du document
-    attribut lang définissant la langue de base du site -->
+
 <html lang="fr">
 
 <head>
